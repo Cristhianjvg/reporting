@@ -7,8 +7,11 @@ const routes: Routes = [
   {path: '', 
   component: MainPagesComponent,
   children: [
-  {path: '', loadChildren: () => import('./main-pages/home/home.module').then(m =>m.HomeModule)}
-  // {path: 'docentes', loadChildren: () => import('./main-pages/categories/docentes.module').then(m =>m.CategoriesModule)},
+  {path: '', loadChildren: () => import('./main-pages/home/home.module').then(m =>m.HomeModule)},
+  {path: 'docentes', loadChildren: () => import('./main-pages/docentes/docentes.module').then(m =>m.
+    DocentesModule)},
+    {path: 'actividades', loadChildren: () => import('./main-pages/actividades/actividades.module').then(m =>m.
+      ActividadesModule)}
   ]}
 ]
 

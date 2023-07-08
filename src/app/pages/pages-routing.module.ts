@@ -10,8 +10,8 @@ const routes: Routes = [
   {path: '', loadChildren: () => import('./main-pages/home/home.module').then(m =>m.HomeModule)},
   {path: 'docentes', loadChildren: () => import('./main-pages/docentes/docentes.module').then(m =>m.
     DocentesModule)},
-    {path: 'actividades', loadChildren: () => import('./main-pages/actividades/actividades.module').then(m =>m.
-      ActividadesModule)}
+  {path: 'actividades', loadChildren: () => import('./main-pages/actividades/actividades.module').then(m =>m.ActividadesModule)},
+  {path: 'calendario', loadChildren: () => import('./main-pages/calendario/calendario.module').then(m =>m.CalendarioModule)}
   ]}
 ]
 

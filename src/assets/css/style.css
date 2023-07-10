@@ -17,10 +17,10 @@
   --black2: #999;
 }
 
-body {
+/* body {
   min-height: 100vh;
   overflow-x: hidden;
-}
+} */
 
 .container1 {
   position: absolute;

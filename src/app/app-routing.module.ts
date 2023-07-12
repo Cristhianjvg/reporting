@@ -4,7 +4,8 @@ import { HomeComponent } from './pages/main-pages/home/home.component';
 import { MainPagesComponent } from './pages/main-pages/main-pages.component';
 import { PagesRoutingModule } from './pages/pages-routing.module';
 const routes: Routes = [
-  {path: '', redirectTo: '', pathMatch: 'full'}
+  {path: '', redirectTo: '', pathMatch: 'full'},
+  
 ];
 
 @NgModule({

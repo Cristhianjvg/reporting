@@ -9,6 +9,12 @@
     "src/main.ts"
   ],
   "include": [
+    
     "src/**/*.d.ts"
-  ]
+  ],
+  "paths": {
+    "@angular/*": ["./node_modules/@angular/*"]
+  },
+  
 }
+

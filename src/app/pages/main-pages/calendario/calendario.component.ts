@@ -1,61 +1,58 @@
-import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/core';
+import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
-
 
 @Component({
   selector: 'app-calendario',
   templateUrl: './calendario.component.html',
   styleUrls: ['./calendario.component.css']
 })
-export class CalendarioComponent implements OnInit{
+export class CalendarioComponent {
+  calendarVisible = true;
+  calendarOptions: CalendarOptions = {
+    plugins: [
+      interactionPlugin,
+      dayGridPlugin,
+      timeGridPlugin,
+      listPlugin,
+    ],
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+    },
+    initialView: 'dayGridMonth',
+    initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+    weekends: true,
+    editable: true,
+    selectable: true,
+    selectMirror: true,
+    dayMaxEvents: true,
+    select: this.handleDateSelect.bind(this),
+    eventClick: this.handleEventClick.bind(this),
+    eventsSet: this.handleEvents.bind(this)
+    /* you can update a remote database when these fire:
+    eventAdd:
+    eventChange:
+    eventRemove:
+    */
+  };
+  currentEvents: EventApi[] = [];
 
-  public events: EventApi[] = [];
-
-  public options: any;
-
-  constructor(private changeDetector: ChangeDetectorRef){
-
+  constructor(private changeDetector: ChangeDetectorRef) {
   }
 
-  ngOnInit(){
-
-    this.options = {
-      plugins: [dayGridPlugin],
-      defaultDate: new Date(),
-      header:{
-        left: 'prev,next',
-        center: 'title',
-        right: 'dayGridMonth, timeGridweek, timeGridDay'
-      },
-      editable: false
-    }
-
-    // this.events = [
-    //   {
-    //     title: "Evento 1",
-    //     start: new Date(),
-    //     description: "Evento 1"
-    //   },
-    //   {
-    //     title: "Evento 2",
-    //     start: new Date(new Date().getTime() + 89391),
-    //     description: "Evento 2"
-    //   },
-    //   {
-    //     title: "Evento 2",
-    //     start: new Date(),
-    //     end: new Date(new Date().getTime() + 80000 ),
-    //     description: "Evento 2"
-    //   }
-    // ]
+  handleCalendarToggle() {
+    this.calendarVisible = !this.calendarVisible;
   }
-
 
   handleWeekendsToggle() {
-    const { options } = this;
-    options.weekends = !options.weekends;
+    const { calendarOptions } = this;
+    calendarOptions.weekends = !calendarOptions.weekends;
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
@@ -82,8 +79,7 @@ export class CalendarioComponent implements OnInit{
   }
 
   handleEvents(events: EventApi[]) {
-    this.events = events;
+    this.currentEvents = events;
     this.changeDetector.detectChanges();
   }
-
 }

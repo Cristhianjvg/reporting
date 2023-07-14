@@ -10,7 +10,7 @@
 }
 
 :root {
-  --blue: #2a2185;
+  --blue1: #2a2185;
   --white: #fff;
   --gray: #f5f5f5;
   --black1: #222;
@@ -47,8 +47,8 @@
   position: fixed;
   width: 300px;
   height: 100%;
-  background: var(--blue);
-  border-left: 10px solid var(--blue);
+  background: var(--blue1);
+  border-left: 10px solid var(--blue1);
   transition: 0.5s;
   overflow: hidden;
 }
@@ -91,7 +91,7 @@
 }
 .navigation1 ul li:hover a,
 .navigation1 ul li.hovered a {
-  color: var(--blue);
+  color: var(--blue1);
 }
 
 .navigation1 ul li a .icon1 {
@@ -168,7 +168,7 @@
 
 
 /* ====================== Responsive Design ========================== */
-/* @media (max-width: 991px) {
+ @media (max-width: 991px) {
   .navigation1 {
     left: -300px;
   }
@@ -228,4 +228,4 @@
     right: 0;
     left: initial;
   }
-} */
+} 

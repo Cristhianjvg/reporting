@@ -8,7 +8,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+/* 
 :root {
   --blue: #2a2185;
   --white: #fff;
@@ -20,10 +20,10 @@
 body {
   min-height: 100vh;
   overflow-x: hidden;
-}
+} */
 
 /* =============== navigation1 ================ */
-.navigation1 {
+/* .navigation1 {
   position: fixed;
   width: 290px;
   height: 100%;
@@ -94,9 +94,10 @@ body {
   line-height: 60px;
   text-align: start;
   white-space: nowrap;
-}
+} */
 
 /* --------- curve outside ---------- */
+/* 
 .navigation1 ul li:hover a::before,
 .navigation1 ul li.hovered a::before {
   content: "";
@@ -143,7 +144,7 @@ body {
   align-items: center;
   font-size: 2.5rem;
   cursor: pointer;
-}
+} */
 
 
 

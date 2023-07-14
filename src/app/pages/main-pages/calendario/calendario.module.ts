@@ -8,7 +8,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
-    CalendarioComponent,
+    CalendarioComponent
   ],
   imports: [
     CommonModule,

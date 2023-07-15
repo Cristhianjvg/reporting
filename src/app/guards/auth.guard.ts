@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/enviroment/environment';
+// import { environment } from 'src/enviroment/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -25,10 +25,23 @@ export class AuthGuard implements CanActivate {
             idtoken: localStorage.getItem('token')
           }
 
+          // this.http.post(environment.urlGetUser, body).subscribe(
+          //   resp =>{
+          //     resolve(true);
+          //   },
+          //   err =>{
+          //     localStorage.removeItem('token');
+          //     localStorage.removeItem('refreshToken');
+          //     console.log('hay error');
+          //     resolve(false);
+          //   }
+          // )
           resolve(true);
         }else{
           this.router.navigateByUrl("/login");
+          console.log("sali");
           resolve(false);
+          
         }
       })
     

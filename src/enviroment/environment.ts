@@ -6,7 +6,7 @@ export const environment = {
     production: false,
     urlFirebase: 'https://reporting-6633e-default-rtdb.firebaseio.com/',
     urlLogin: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBKGVvgb476lnNIItMuj9uWea6fe8y_4ME',
-
+    // urlGetUser: 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyBKGVvgb476lnNIItMuj9uWea6fe8y_4ME'
   };
   
   /*

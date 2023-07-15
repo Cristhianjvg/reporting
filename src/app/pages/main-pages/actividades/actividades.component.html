@@ -1,1 +1,94 @@
-<p>actividades works!</p>
+<style>
+    .content-section {
+      margin-left: 220px;
+      padding: 20px;
+    }
+</style>
+
+
+
+<section class="content-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="custom-heading" style="text-align: center;">Registro de Actividades</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="carrera">Carrera:</label>
+                    <select id="comboCarreras" class="form-control"></select>
+                </div>
+                <div class="form-group">
+                    <label for="docente">Docente:</label>
+                    <select id="comboDocentes" class="form-control"></select>
+                </div>
+                <div class="form-group">
+                    <label for="fechaInicio">Fecha de Inicio:</label>
+                    <input id="fechaInicio" type="date" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="fechaFin">Fecha Final:</label>
+                    <input id="fechaFin" type="date" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="asignatura">Asignatura:</label>
+                    <select id="comboAsignaturas" class="form-control"></select>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input id="email" class="form-control" type="email" placeholder="Ingrese su Email">
+                </div>
+                <div class="form-group">
+                    <label for="actividad">Actividad:</label>
+                    <textarea id="actividad" class="form-control" rows="3" placeholder="Ingrese descripción"></textarea>
+                </div>
+            </div>
+            
+            <div class="col-md-12">
+                <button id="btnAsignar" class="btn btn-primary">Asignar</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card card-custom">
+                <div class="card-body table-responsive p-0">
+                    <table id="gridDatos" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Carrera</th>
+                                <th>Docente</th>
+                                <th>Asignatura</th>
+                                <th>PAO</th>
+                                <th>E-mail</th>
+                                <th>Fecha Inicio</th>
+                                <th>Fecha Final</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      llenarCombo();
+      llenarGrid();
+  
+      const btnAsignar = document.getElementById('btnAsignar');
+      btnAsignar.addEventListener('click', function (event) {
+        event.preventDefault();
+        asignarActividad();
+      });
+    });
+</script>
+

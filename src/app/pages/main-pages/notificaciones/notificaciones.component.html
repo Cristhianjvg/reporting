@@ -1,0 +1,76 @@
+<!-- 
+<style>
+  .content-section {
+    margin-left: 220px;
+    padding: 20px;
+  }
+</style>
+<div class="sidebar">
+  <ul>
+    <li><a href="#">Tablero</a></li>
+    <li><a >Registro</a>
+    <ul>
+      <li><a routerLink="/actividades"> Registro de Actividades</a></li>
+      <li><a routerLink="/docentes"> Registro de Docentes </a></li>
+    </ul>
+    </li>
+
+    <li><a routerLink="/notificacion">Notificación</a></li>
+    <li><a href="#">Asignaciones</a></li>
+  </ul>
+</div>
+ -->
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="custom-heading" style="text-align: center;">Notificaciones Recientes</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label id="label1">Buscar Docentes:</label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <select id="comboNombres" placeholder="Buscar docentes" class="form-control"></select>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="col-md-12">
+      <div class="card card-custom">
+        <div class="card-body table-responsive p-0">
+          <table id="gridDatos" class="table table-hover">
+            <thead>
+              <tr>
+                <th>Actividades</th>
+                <th>Docentes</th>
+                <th>Asignatura</th>
+                <th>Fecha Modificación</th>
+                <th>Calendario</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    llenarCombo();
+    llenarGrid();
+  });
+</script>

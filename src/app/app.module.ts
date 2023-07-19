@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PagesModule } from './pages/pages.module';
+import { environment } from 'src/enviroment/environment';
+import {initializeApp, provideFirebaseApp} from '@angular/fire/app';
+import {provideStorage, getStorage} from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,9 @@ import { PagesModule } from './pages/pages.module';
     BrowserModule,
     PagesModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideStorage(() => getStorage())
   ],
   providers: [],
   bootstrap: [AppComponent]

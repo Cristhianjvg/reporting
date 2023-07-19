@@ -14,8 +14,8 @@ const routes: Routes = [
     DocentesModule)},
   {path: 'actividades', loadChildren: () => import('./main-pages/actividades/actividades.module').then(m =>m.ActividadesModule)},
   {path: 'calendario', loadChildren: () => import('./main-pages/calendario/calendario.module').then(m =>m.CalendarioModule)},
-  {path: 'notificacion', loadChildren: () => import('./main-pages/notificaciones/notificaciones.module').then(m =>m.NotificacionesModule)}
-
+  {path: 'notificacion', loadChildren: () => import('./main-pages/notificaciones/notificaciones.module').then(m =>m.NotificacionesModule)},
+  {path: 'asignaciones', loadChildren: () => import('./main-pages/asignaciones/asignaciones.module').then(m =>m.AsignacionesModule)},
   ]}
 ]
 

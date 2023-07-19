@@ -16,6 +16,7 @@ const routes: Routes = [
   {path: 'calendario', loadChildren: () => import('./main-pages/calendario/calendario.module').then(m =>m.CalendarioModule)},
   {path: 'notificacion', loadChildren: () => import('./main-pages/notificaciones/notificaciones.module').then(m =>m.NotificacionesModule)},
   {path: 'asignaciones', loadChildren: () => import('./main-pages/asignaciones/asignaciones.module').then(m =>m.AsignacionesModule)},
+  {path: 'carga-material', loadChildren: () => import('./main-pages/carga-material/carga-material.module').then(m =>m.CargaMaterialModule)},
   ]}
 ]
 

@@ -9,7 +9,7 @@ import { functions } from 'src/app/helpers/functions';
 @Component({
   selector: 'app-docentes',
   templateUrl: './docentes.component.html',
-  styleUrls: ['./docentes.component.css']
+  styleUrls: ['./docentes.component.css'],
 })
 export class DocentesComponent implements OnInit{
 

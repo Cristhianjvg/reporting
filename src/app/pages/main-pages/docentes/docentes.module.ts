@@ -4,6 +4,13 @@ import { DocentesComponent } from './docentes.component';
 import { DocentesRoutingModule } from './docentes-routing.module';
 import { IonicModule } from '@ionic/angular';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DropDownsModule } from "@progress/kendo-angular-dropdowns";
+import { LabelModule } from "@progress/kendo-angular-label";
+import { InputsModule } from "@progress/kendo-angular-inputs";
+import { ButtonsModule } from "@progress/kendo-angular-buttons";
+import { FormsModule } from '@angular/forms';
+
+
 
 
 @NgModule({
@@ -12,7 +19,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     DocentesRoutingModule,
     IonicModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DropDownsModule,
+    LabelModule,
+    InputsModule,
+    ButtonsModule,
+    FormsModule
   ]
 })
 export class DocentesModule { }

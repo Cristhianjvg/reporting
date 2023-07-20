@@ -8,6 +8,10 @@ import { PagesModule } from './pages/pages.module';
 import { environment } from 'src/enviroment/environment';
 import {initializeApp, provideFirebaseApp} from '@angular/fire/app';
 import {provideStorage, getStorage} from '@angular/fire/storage';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 
 @NgModule({
   declarations: [
@@ -19,7 +23,9 @@ import {provideStorage, getStorage} from '@angular/fire/storage';
     HttpClientModule,
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
+    DropDownsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

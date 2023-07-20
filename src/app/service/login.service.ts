@@ -9,8 +9,6 @@ import { map } from 'rxjs';
 })
 export class LoginService {
 
-  
-
   constructor( private http: HttpClient) { }
 
   login(data: Ilogin){
@@ -19,6 +17,7 @@ export class LoginService {
 
         localStorage.setItem("token", resp.idToken);
         localStorage.setItem("refreshToken", resp.refreshToken);
+        
       })
     );
 

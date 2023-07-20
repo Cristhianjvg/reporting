@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DocentesComponent } from './docentes.component';
 import { DocentesRoutingModule } from './docentes-routing.module';
-import { IonicModule } from '@ionic/angular'
+import { IonicModule } from '@ionic/angular';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import { IonicModule } from '@ionic/angular'
   imports: [
     CommonModule,
     DocentesRoutingModule,
-    IonicModule
+    IonicModule,
+    ReactiveFormsModule
   ]
 })
 export class DocentesModule { }

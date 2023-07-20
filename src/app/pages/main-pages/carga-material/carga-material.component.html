@@ -24,12 +24,31 @@
               <div class="col-md-5" style="margin-right: 90px;">
               
                 <div class="form-group">
-                    <label for="email">Carrera:</label>
-                    <input id="email" class="form-control" type="text" placeholder="Ingrese su Nombre" formControlName="email" >
+                  <label for="asignatura">Carrera:</label>
+                    <kendo-multiselect
+                      [data]="CarrerasData"
+                      [kendoDropDownFilter]="filterSettings"
+                      textField="text"
+                      valueField="value"
+                    >
+                    <ng-template kendoMultiSelectCustomItemTemplate let-customText>
+                      <strong>{{ customText }}</strong>
+                    </ng-template>
+                    </kendo-multiselect>
                 </div>
                 <div class="form-group">
-                    <label for="asunto">Asignatura:</label>
-                    <input id="asunto" class="form-control" type="text" placeholder="Ingrese su Nombre" formControlName="asunto" >
+                  <label for="asignatura">Asignatura:</label>
+                  
+                    <kendo-multiselect
+                      [data]="AsignaturasData"
+                      [kendoDropDownFilter]="filterSettings"
+                      textField="text"
+                      valueField="value"
+                    >
+                    <ng-template kendoMultiSelectCustomItemTemplate let-customText>
+                      <strong>{{ customText }}</strong>
+                    </ng-template>
+                    </kendo-multiselect>
                 </div>
                 <div class="form-group">
                     <label for="asunto">Subir Material:</label>

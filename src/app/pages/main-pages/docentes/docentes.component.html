@@ -12,11 +12,14 @@
   }
 </style>
 
+<h2 class="custom-heading" style="text-align: center; color: blueviolet;">Registro de Docentes</h2>
 <section class="content-section">
+  
   <div class="container-fluid">
+    
       <div class="row">
           <div class="col-md-12">
-              <h2 class="custom-heading" style="text-align: center; color: blueviolet;">Registro de Docentes</h2>
+              
           </div>
       </div>
       <div class="row">
@@ -51,6 +54,13 @@
           </div>
           
         </div>
+        <div class="col-md-5" >
+          <div class="form-group">
+            <label for="cedula">Cedula:</label>
+            <input id="cedula" class="form-control" type="text" placeholder="Ingrese su Apellido" formControlName="cedula" [ngClass]="{'is-invalid': invalidField('apellido')}">
+            <div class="invalid-feedback">Please fill out this field.</div>
+          </div>
+        </div>
         
           <div class="col-md-11" ><div class="form-group">
             <label for="asunto">Subir registro de Docente:</label>
@@ -60,7 +70,7 @@
                   <label class="custom-file-label" for="inputGroupFile01">Escoger Archivo</label>
                 </div>
             </div>
-        </div>
+          </div>
               <button id="btnAsignar" class="btn btn-primary float-right">Asignar</button>
          
           </div>
@@ -93,12 +103,15 @@
       <div class="card-body table-responsive p-0">
         <table class="table table-hover text-nowrap table-striped">
           <thead>
-            <tr>
+            <tr style="text-align: center;">
               <th>ID</th>
               <th>Apellido</th>
               <th>Nombre</th>
+              <th>Cedula</th>
               <th>Email</th>
               <th>Celular</th>
+              <th>Editar</th>
+              <th>Eliminar</th>
             </tr>
           </thead>
           <tbody>
@@ -106,8 +119,11 @@
               <td>{{doc.id}}</td>
               <td>{{doc.apellido}}</td>
               <td>{{doc.nombre}}</td>
+              <td>{{doc.cedula}}</td>
               <td>{{doc.email}}</td>
               <td>{{doc.celular}}</td>
+              <td style="text-align: center; color: green;"><ion-icon style="cursor: pointer;" name="create-outline"></ion-icon></td>
+              <td style="text-align: center; color: red;"><ion-icon style=" cursor: pointer;" name="close-circle-outline"></ion-icon></td>
             </tr>
           </tbody>
 

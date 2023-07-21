@@ -4,7 +4,8 @@ import { DocenteService } from 'src/app/service/docente.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { alerts } from 'src/app/helpers/alerts';
 import { functions } from 'src/app/helpers/functions';
-
+import { CarrerasService } from 'src/app/service/carreras.service';
+import { Carreras } from 'src/app/interface/carreras';
 
 @Component({
   selector: 'app-docentes',
@@ -21,6 +22,7 @@ export class DocentesComponent implements OnInit{
   public f = this.form.group({
     nombre: ['', [Validators.required, Validators.pattern('[a-zA-ZáéíóúñÁÉÍÓÚÑ ]*')]],
     apellido: ['', Validators.required],
+    cedula: ['', [ Validators.required]],
     celular: [''],
     email: ['', [Validators.required, Validators.email]],
     
@@ -28,7 +30,7 @@ export class DocentesComponent implements OnInit{
   formSubmitted = false;
   errorForm = "";
 
-  constructor(private docenteService: DocenteService, private form: FormBuilder){}
+  constructor(private docenteService: DocenteService, private form: FormBuilder, private carrerasService: CarrerasService){}
   
   ngOnInit(): void{
     this.getDocentes();
@@ -42,14 +44,18 @@ export class DocentesComponent implements OnInit{
         
         id: resp[a].id,
         apellido: resp[a].apellido,
+        nombre: resp[a].nombre,
+        cedula: resp[a].cedula,
         celular: resp[a].celular,
         email: resp[a].email,
-        nombre: resp[a].nombre
+        
       }) as Idocentes)
     });
     console.log(this.docentes);
     
   }
+
+ 
 
   crearDocente(){
     this.formSubmitted = true;
@@ -71,6 +77,7 @@ export class DocentesComponent implements OnInit{
     const dataDocente: Idocentes = {
       id: String(this.lastId),
       nombre: this.f.controls.nombre.value ?? '',
+      cedula: this.f.controls.cedula.value ?? '',
       apellido: this.f.controls.apellido.value ?? '',
       celular: this.f.controls.celular.value,
       email: this.f.controls.email.value ?? ''

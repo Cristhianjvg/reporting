@@ -2,6 +2,8 @@ import { Component, AfterViewInit } from '@angular/core';
 import { DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
 import { Idocentes } from 'src/app/interface/idocentes';
 import { DocenteService } from 'src/app/service/docente.service';
+import { CarrerasService } from 'src/app/service/carreras.service';
+import { Carreras } from 'src/app/interface/carreras';
 
 @Component({
   selector: 'app-actividades',
@@ -10,18 +12,20 @@ import { DocenteService } from 'src/app/service/docente.service';
 })
 export class ActividadesComponent implements AfterViewInit { 
 
-  constructor(private docentesService: DocenteService){
+  constructor(private docentesService: DocenteService,private carrerasService: CarrerasService){
 
   }
 
   ngAfterViewInit() {
   this.getDocentes();
+  this.getCarreras();
   }
+
   
   docentes: Idocentes[] = [];
-  public DocentesData: Array<{ text: string; value: number }> = [
-    { text: "etica", value: 1 },
-  ];
+  carreras: Carreras[] = [];
+  public DocentesData: Array<{ text: string; value: number }> = [];
+  public CarrerasData: Array<{ text: string; value: number }> = [];
   
   getDocentes(){
     this.docentesService.getData().subscribe((resp: any)=> {
@@ -43,12 +47,23 @@ export class ActividadesComponent implements AfterViewInit {
     
   }
 
-  public CarrerasData: Array<{ text: string; value: number }> = [
-    { text: "Computacion", value: 1 },
-    { text: "Derecho", value: 2 },
-    { text: "Medicina", value: 3 },
-    { text: "arquitectura", value: 4 },
-  ];
+  getCarreras(){
+    this.carrerasService.getData().subscribe((resp: any)=> {
+      this.carreras = Object.keys(resp).map(a => ({
+        id: resp[a].id,
+        nombre: resp[a].nombre,
+      }) as Carreras)
+    });
+    console.log()
+    this.CarrerasData = this.carreras.map((carreras: Carreras) => {
+      return { text: carreras.nombre, value: parseInt(carreras.id, 10)  };
+    });
+    console.log(this.CarrerasData);
+    
+  }
+  
+
+  
 
   public AsignaturasData: Array<{ text: string; value: number }> = [
     { text: "etica", value: 1 },

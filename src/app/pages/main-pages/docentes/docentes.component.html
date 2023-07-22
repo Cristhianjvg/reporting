@@ -1,75 +1,97 @@
-
 <style>
   .content-section {
     margin-left: 70px;
     margin-right: 10px;
     padding: 20px;
   }
+
   .content-section1 {
     margin-left: 20px;
-    
+
     padding: 20px;
   }
 </style>
 
 <section class="content-section">
   <div class="container-fluid">
-      <div class="row">
-          <div class="col-md-12">
-              <h2 class="custom-heading" style="text-align: center; color: blueviolet;">Registro de Docentes</h2>
-          </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="custom-heading" style="text-align: center; color: blueviolet;">Registro de Docentes</h2>
       </div>
-      <div class="row">
-        <form autocomplete="off" [formGroup]="f" (ngSubmit)="crearDocente()" class="form-group" class="col-md-12">
-          <div style="display: flex;">
-            <div class="col-md-5" style="margin-right: 90px;">
-            
-              <div class="form-group">
-                  <label for="nombre">Nombre:</label>
-                  <input id="nombre" class="form-control" type="text" placeholder="Ingrese su Nombre" formControlName="nombre" [ngClass]="{'is-invalid': invalidField('nombre') || f.controls.nombre.invalid && f.controls.nombre.errors?.['pattern'] }">
-                  <div class="invalid-feedback" *ngIf="f.controls.nombre.invalid && f.controls.nombre.errors?.['required']">Please fill out this field.</div>
-                  <div class="invalid-feedback" *ngIf="f.controls.nombre.invalid && f.controls.nombre.errors?.['pattern']">Please write the name correctly</div>
-              </div>
-              <div class="form-group">
-                  <label for="celular">celular:</label>
-                  <input id="celular" class="form-control" type="text" placeholder="Ingrese su Telefono" formControlName="celular">
-                  
-              </div>
+    </div>
+    <div class="row">
+      <form autocomplete="off" [formGroup]="f" (ngSubmit)="crearDocente()" class="form-group" class="col-md-12">
+        <div style="display: flex;">
+          <div class="col-md-5" style="margin-right: 90px;">
+
+            <div class="form-group">
+              <label for="nombre">Nombre:</label>
+              <input id="nombre" class="form-control" type="text" placeholder="Ingrese su Nombre"
+                formControlName="nombre"
+                [ngClass]="{'is-invalid': invalidField('nombre') || f.controls.nombre.invalid && f.controls.nombre.errors?.['pattern'] }">
+              <div class="invalid-feedback" *ngIf="f.controls.nombre.invalid && f.controls.nombre.errors?.['required']">
+                Please fill out this field.</div>
+              <div class="invalid-feedback" *ngIf="f.controls.nombre.invalid && f.controls.nombre.errors?.['pattern']">
+                Please write the name correctly</div>
+            </div>
+            <div class="form-group">
+              <label for="celular">celular:</label>
+              <input id="celular" class="form-control" type="text" placeholder="Ingrese su Telefono"
+                formControlName="celular">
+
+            </div>
           </div>
           <div class="col-md-5">
-              <div class="form-group">
-                  <label for="apellido">Apellido:</label>
-                  <input id="apellido" class="form-control" type="text" placeholder="Ingrese su Apellido" formControlName="apellido" [ngClass]="{'is-invalid': invalidField('apellido')}">
-                  <div class="invalid-feedback">Please fill out this field.</div>
-              </div>
-              <div class="form-group">
-                  <label for="email">Email:</label>
-                  <input id="email" class="form-control" type="email" placeholder="Ingrese su Email" formControlName="email" [ngClass]="{'is-invalid': invalidField('email')}">
-                  <div class="invalid-feedback">Please fill out this field.</div>
-              </div>
-              
-          </div>
-          
-        </div>
-        
-          <div class="col-md-11" ><div class="form-group">
-            <label for="asunto">Alertas de entrega:</label>
-            <div class="input-group mb-3">
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                  <label class="custom-file-label" for="inputGroupFile01">Escoger Archivo</label>
-                </div>
+            <div class="form-group">
+              <label for="apellido">Apellido:</label>
+              <input id="apellido" class="form-control" type="text" placeholder="Ingrese su Apellido"
+                formControlName="apellido" [ngClass]="{'is-invalid': invalidField('apellido')}">
+              <div class="invalid-feedback">Please fill out this field.</div>
             </div>
-        </div>
-              <button id="btnAsignar" class="btn btn-primary float-right">Asignar</button>
-         
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input id="email" class="form-control" type="email" placeholder="Ingrese su Email" formControlName="email"
+                [ngClass]="{'is-invalid': invalidField('email')}">
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+
           </div>
-          
-        </form>
-      </div>
+
+
+        </div>
+
+        <div class="col-md-11">
+          <div class="form-group">
+
+          </div>
+          <label for="asunto">Alertas de entrega:</label>
+          <div class="input-group mb-3">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="inputGroupFile01"
+                aria-describedby="inputGroupFileAddon01">
+              <label class="custom-file-label" for="inputGroupFile01">Escoger Archivo</label>
+            </div>
+          </div>
+
+          <script>
+            var inputFile = document.getElementById("inputGroupFile01");
+
+            inputFile.addEventListener("change", function (event) {
+              var filePath = event.target.value;
+              var fileName = filePath.split("\\").pop() || filePath.split("/").pop();
+              var label = document.querySelector(".custom-file-label");
+              label.innerHTML = filePath;
+            });
+          </script>
+          <button id="btnAsignar" class="btn btn-primary float-right">Asignar</button>
+
+        </div>
+
+      </form>
+    </div>
   </div>
 </section>
-  
+
 <section class="content-section1">
   <!-- tabla de docentes -->
   <div class="col-md-12">
@@ -88,7 +110,7 @@
           </ul>
         </div>
       </div>
-      
+
       <!-- /.card-header -->
       <div class="card-body table-responsive p-0">
         <table class="table table-hover text-nowrap table-striped">
@@ -138,7 +160,7 @@
 
     //Date picker
     $('#reservationdate').datetimepicker({
-        format: 'L'
+      format: 'L'
     });
 
     //Date and time picker
@@ -157,16 +179,16 @@
     //Date range as a button
     $('#daterange-btn').daterangepicker(
       {
-        ranges   : {
-          'Today'       : [moment(), moment()],
-          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+        ranges: {
+          'Today': [moment(), moment()],
+          'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days': [moment().subtract(6, 'days'), moment()],
           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          'This Month': [moment().startOf('month'), moment().endOf('month')],
+          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
         },
         startDate: moment().subtract(29, 'days'),
-        endDate  : moment()
+        endDate: moment()
       },
       function (start, end) {
         $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
@@ -186,11 +208,11 @@
     //color picker with addon
     $('.my-colorpicker2').colorpicker()
 
-    $('.my-colorpicker2').on('colorpickerChange', function(event) {
+    $('.my-colorpicker2').on('colorpickerChange', function (event) {
       $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
     })
 
-    $("input[data-bootstrap-switch]").each(function(){
+    $("input[data-bootstrap-switch]").each(function () {
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     })
 
@@ -220,17 +242,17 @@
     clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
   })
 
-  myDropzone.on("addedfile", function(file) {
+  myDropzone.on("addedfile", function (file) {
     // Hookup the start button
-    file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file) }
+    file.previewElement.querySelector(".start").onclick = function () { myDropzone.enqueueFile(file) }
   })
 
   // Update the total progress bar
-  myDropzone.on("totaluploadprogress", function(progress) {
+  myDropzone.on("totaluploadprogress", function (progress) {
     document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
   })
 
-  myDropzone.on("sending", function(file) {
+  myDropzone.on("sending", function (file) {
     // Show the total progress bar when upload starts
     document.querySelector("#total-progress").style.opacity = "1"
     // And disable the start button
@@ -238,19 +260,18 @@
   })
 
   // Hide the total progress bar when nothing's uploading anymore
-  myDropzone.on("queuecomplete", function(progress) {
+  myDropzone.on("queuecomplete", function (progress) {
     document.querySelector("#total-progress").style.opacity = "0"
   })
 
   // Setup the buttons for all transfers
   // The "add files" button doesn't need to be setup because the config
   // `clickable` has already been specified.
-  document.querySelector("#actions .start").onclick = function() {
+  document.querySelector("#actions .start").onclick = function () {
     myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
   }
-  document.querySelector("#actions .cancel").onclick = function() {
+  document.querySelector("#actions .cancel").onclick = function () {
     myDropzone.removeAllFiles(true)
   }
   // DropzoneJS Demo Code End
 </script>
-

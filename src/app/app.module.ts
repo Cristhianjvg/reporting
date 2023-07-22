@@ -10,7 +10,7 @@ import {initializeApp, provideFirebaseApp} from '@angular/fire/app';
 import {provideStorage, getStorage} from '@angular/fire/storage';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     PagesModule,
     HttpClientModule,
+    SharedModule,
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideStorage(() => getStorage()),

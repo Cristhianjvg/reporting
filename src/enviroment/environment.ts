@@ -15,8 +15,8 @@ export const environment = {
       storageBucket: "reporting-6633e.appspot.com",
       messagingSenderId: "560813691565",
       appId: "1:560813691565:web:b5d220153fcfa5f8f76c24"
-    }
-    // urlGetUser: 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyBKGVvgb476lnNIItMuj9uWea6fe8y_4ME'
+    },
+    urlGetUser: 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyBKGVvgb476lnNIItMuj9uWea6fe8y_4ME'
   };
   
   /*

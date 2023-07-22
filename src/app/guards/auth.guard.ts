@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth';
+import { environment } from 'src/enviroment/environment';
 // import { environment } from 'src/enviroment/environment';
 
 @Injectable({
@@ -11,9 +13,7 @@ export class AuthGuard implements CanActivate {
 
   constructor(private router: Router, private http: HttpClient){}
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  canActivate(): Promise<boolean>{
 
       return new Promise(resolve => {
         //validar si el token si existe
@@ -25,21 +25,19 @@ export class AuthGuard implements CanActivate {
             idtoken: localStorage.getItem('token')
           }
 
-          // this.http.post(environment.urlGetUser, body).subscribe(
-          //   resp =>{
-          //     resolve(true);
-          //   },
-          //   err =>{
-          //     localStorage.removeItem('token');
-          //     localStorage.removeItem('refreshToken');
-          //     console.log('hay error');
-          //     resolve(false);
-          //   }
-          // )
+          this.http.post(environment.urlGetUser, body).subscribe(
+            resp =>{
+              resolve(true);
+            },
+            err =>{
+
+              console.log("no borre los tokens");
+              resolve(false);
+            }
+          )
           resolve(true);
         }else{
           this.router.navigateByUrl("/login");
-          console.log("sali");
           resolve(false);
           
         }

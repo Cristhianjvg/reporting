@@ -1,48 +1,53 @@
 <body class="hold-transition login-page">
-    <div class="login-box">
-      <div class="login-logo">
-        <a href="../../index2.html"><b>Admin</b>LTE</a>
+  <div class="container1">
+    <div class="left-section">
+      <div class="logo-container">
+        <img src="../../../assets/img/Vector.svg" alt="Logo de la aplicación" >
+        <h4>Reporting</h4>
       </div>
-      <!-- /.login-logo -->
-      <div class="card">
-        <div class="card-body login-card-body">
-          <p class="login-box-msg">Sign in to start your session</p>
-    
-          <form autocomplete="off" [formGroup]="f" (ngSubmit)="login()">
-            <div class="input-group mb-3">
-              <input type="email" class="form-control" placeholder="Email" 
-              formControlName="email"
-              [ngClass]="{'is-invalid': invalidField('email')}">
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-envelope"></span>
+      <div class="login-container">
+        <div class="login-box">
+          <div class="login-logo">
+            <a href="#"><b>Acceso a la Plataforma</b></a>
+          </div>
+              <p class="login-box-msg">Inicie sesion para ingresar</p>
+              <form autocomplete="off" [formGroup]="f" (ngSubmit)="login()">
+                <label for="E-mail">E-mail</label>
+                <div class="input-group mb-3">
+                  
+                  <input type="email" class="form-control" placeholder="Email" 
+                  formControlName="email"
+                  [ngClass]="{'is-invalid': invalidField('email')}">
+                  <div class="invalid-feedback">Porfavor llene este campo.</div>
                 </div>
-              </div>
-              <div class="invalid-feedback">Please fill out this field.</div>
-            </div>
-            <div class="input-group mb-3">
-              <input type="password" class="form-control" placeholder="Password" formControlName="password"
-              [ngClass]="{'is-invalid': invalidField('password')}">
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-lock"></span>
+                <label for="Contraseña">Contraseña</label>
+                <div class="input-group mb-3">
+                  
+                  <input type="password" class="form-control" placeholder="Contraseña" formControlName="password"
+                  [ngClass]="{'is-invalid': invalidField('password')}">
+                  <div class="invalid-feedback">Porfavor llene este campo.</div>
                 </div>
-              </div>
-              <div class="invalid-feedback">Please fill out this field.</div>
-            </div>
-            <div class="row">
-              
-              <!-- /.col -->
-              <div class="col-12">
-                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-              </div>
-              <!-- /.col -->
-            </div>
-          </form>
+                <div class="row">
+                  
+                  <!-- /.col -->
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-block" style="background-color: blueviolet;">Entrar</button>
+                  </div>
+                  <!-- /.col -->
+                </div>
+              </form>
         </div>
-        <!-- /.login-card-body -->
       </div>
     </div>
+    <div class="right-section">
+      <div class="overlay"></div>
+      <img src="../../../assets/img/Rectangle 1.png" alt="Imagen de fondo">
+      <div class="centered-content">
+        <img src="../../../assets/img/Vector.png" alt="Otra imagen" style="margin-bottom: 25px; width: 30%;">
+        <h2 style="color: white; white-space: nowrap; wid">Notificaciones y entregas oportunas</h2>
+      </div>
+    </div>
+  </div>
     <!-- /.login-box -->
     
     <!-- jQuery -->

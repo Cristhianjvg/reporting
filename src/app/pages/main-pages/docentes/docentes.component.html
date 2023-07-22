@@ -71,7 +71,7 @@
                 </div>
             </div>
           </div>
-              <button id="btnAsignar" class="btn btn-primary float-right">Asignar</button>
+              <button id="btnAsignar" class="btn btn-primary float-right"  style="background-color: blueviolet; border-color: blueviolet;">Asignar</button>
          
           </div>
           
@@ -88,15 +88,6 @@
     <div class="card">
       <div class="card-header">
         <h3 class="card-title" style="color: blueviolet;">DOCENTES</h3>
-        <div class="card-tools">
-          <ul class="pagination pagination-sm float-right">
-            <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-          </ul>
-        </div>
       </div>
       
       <!-- /.card-header -->
@@ -115,7 +106,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor='let doc of docentes'>
+            <tr *ngFor='let doc of docentes | paginate: {itemsPerPage: 3, currentPage: page}'>
               <td>{{doc.id}}</td>
               <td>{{doc.apellido}}</td>
               <td>{{doc.nombre}}</td>
@@ -125,6 +116,7 @@
               <td style="text-align: center; color: green;"><ion-icon style="cursor: pointer;" name="create-outline"></ion-icon></td>
               <td style="text-align: center; color: red;"><ion-icon style=" cursor: pointer;" name="close-circle-outline"></ion-icon></td>
             </tr>
+            <pagination-controls (pageChange)="page = $event" previousLabel="" nextLabel=""></pagination-controls>
           </tbody>
 
         </table>

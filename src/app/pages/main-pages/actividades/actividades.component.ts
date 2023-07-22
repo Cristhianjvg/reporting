@@ -21,12 +21,12 @@ export class ActividadesComponent implements AfterViewInit {
   }
 
   public f = this.form.group({
-    carrera: ['', [Validators.required, Validators.pattern('[a-zA-ZáéíóúñÁÉÍÓÚÑ ]*')]],
+    carrera: ['', Validators.required],
     asignatura: ['', Validators.required],
     docente: ['', [ Validators.required]],
-    email: [''],
-    fechaI: ['', [Validators.required, Validators.email]],
-    fechaF: ['', [Validators.required, Validators.email]],
+    email: ['', [Validators.required, Validators.email]],
+    fechaI: ['', Validators.required],
+    fechaF: ['', Validators.required],
     actividad: ['']
   })
 
@@ -92,10 +92,6 @@ export class ActividadesComponent implements AfterViewInit {
   }
   
   getEmail(email: any){
-
-    // this.EmailData = this.docentes.filter(doc => doc.id === String(email[0].id)).map((doc: Idocentes) => {
-    //   return { email: doc.email }
-    // })
 
     const selectedEmail = email[0].email; // Ajusta esto si la propiedad no se llama "email".
 

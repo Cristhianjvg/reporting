@@ -15,6 +15,8 @@ export class LoginService {
     return this.http.post(environment.urlLogin, data).pipe(
       map((resp:any) => {
 
+        // console.log("resp", resp.idtoken, resp.refreshToken);
+
         localStorage.setItem("token", resp.idToken);
         localStorage.setItem("refreshToken", resp.refreshToken);
         

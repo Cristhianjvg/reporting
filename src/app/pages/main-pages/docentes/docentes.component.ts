@@ -7,6 +7,7 @@ import { functions } from 'src/app/helpers/functions';
 import { CarrerasService } from 'src/app/service/carreras.service';
 import { Carreras } from 'src/app/interface/carreras';
 
+
 @Component({
   selector: 'app-docentes',
   templateUrl: './docentes.component.html',
@@ -17,6 +18,7 @@ export class DocentesComponent implements OnInit{
   docentes: Idocentes[] = [];
   position: string = '0';
   lastId: number = 0;
+  public page!: number;
 
 
   public f = this.form.group({

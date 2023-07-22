@@ -57,7 +57,9 @@ export class LoginComponent implements OnInit{
         }else if(err.error.error.message == "INVALID_PASSWORD"){
           alerts.basicAlert("Error", "Invalid password", "error");
         }else{
-          alerts.basicAlert("Error", "An error ocurred", "error");
+          // alerts.basicAlert("Error", "An error ocurred", "error");
+                  this.router.navigateByUrl("/")
+
         }
 
         

@@ -9,6 +9,10 @@ import { Idocentes } from '../interface/idocentes';
 export class DocenteService {
 
   constructor(private http: HttpClient) { }
+  //delete todo grid
+  deleteAllData(token: any) {
+    return this.http.delete(`${environment.urlFirebase}docentes.json?auth=${token}`);
+  }
 
   getData(){
     return this.http.get(`${environment.urlFirebase}docentes.json`)

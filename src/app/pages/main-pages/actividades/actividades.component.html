@@ -21,12 +21,13 @@
         <div class="row">
             <div class="col-md-5" style="margin-right: 90px;">
                 <div class="form-group">
-                    <label for="asignatura">Carrera:</label>
+                    <label for="carrera">Carrera:</label>
                       <kendo-multiselect
                         [data]="CarrerasData"
                         [kendoDropDownFilter]="filterSettings"
                         textField="text"
                         valueField="value"
+                        (valueChange)="getAsignaturas($event)"
                       >
                       <ng-template kendoMultiSelectCustomItemTemplate let-customText>
                         <strong>{{ customText }}</strong>
@@ -40,6 +41,7 @@
                         [kendoDropDownFilter]="filterSettings"
                         textField="text"
                         valueField="value"
+                        (valueChange)="getEmail($event)"
                       >
                       <ng-template kendoMultiSelectCustomItemTemplate let-customText>
                         <strong>{{ customText }}</strong>
@@ -59,7 +61,7 @@
                 <div class="form-group">
                     <label for="asignatura">Asignatura:</label>
                       <kendo-multiselect
-                        [data]="CarrerasData"
+                        [data]="AsignaturaData"
                         [kendoDropDownFilter]="filterSettings"
                         textField="text"
                         valueField="value"

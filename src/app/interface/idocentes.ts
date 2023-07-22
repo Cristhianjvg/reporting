@@ -5,4 +5,5 @@ export interface Idocentes {
     celular: string | null;
     email: string;
     nombre: string;
+    asignatura: string;
 }

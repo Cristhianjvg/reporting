@@ -1,3 +1,7 @@
+
+
+
+
 .hobbies-demo.card-container {
     margin-top: 20px;
     display: flex;
@@ -168,4 +172,5 @@
     .hobbies-demo .skeleton-box-large-double {
         height: 78px;
     }
+
 }

@@ -2,13 +2,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
 
 /* =============== Globals ============== */
-* {
+/* * {
   font-family: "Ubuntu", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-/* 
+ 
 :root {
   --blue: #2a2185;
   --white: #fff;
@@ -20,7 +20,7 @@
 body {
   min-height: 100vh;
   overflow-x: hidden;
-} */
+}  */
 
 /* =============== navigation1 ================ */
 /* .navigation1 {
@@ -94,11 +94,11 @@ body {
   line-height: 60px;
   text-align: start;
   white-space: nowrap;
-} */
+}  */
 
 /* --------- curve outside ---------- */
-/* 
-.navigation1 ul li:hover a::before,
+ 
+/* .navigation1 ul li:hover a::before,
 .navigation1 ul li.hovered a::before {
   content: "";
   position: absolute;
@@ -144,7 +144,7 @@ body {
   align-items: center;
   font-size: 2.5rem;
   cursor: pointer;
-} */
+}  */
 
 
 
@@ -209,4 +209,4 @@ body {
     right: 0;
     left: initial;
   }
-} */
+}  */

@@ -11,6 +11,7 @@ import {provideStorage, getStorage} from '@angular/fire/storage';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
+import { LoginModule } from './pages/login/login.module';
 
 
 @NgModule({

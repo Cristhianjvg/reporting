@@ -26,7 +26,7 @@ export class DocentesComponent implements OnInit {
   lastId: number = 0;
   public page!: number;
   filterPipe = '';
-  public placeholderNombre = '';
+  
   public opened = false;
   public actionsLayout: ActionsLayout = "end";
 
@@ -261,6 +261,11 @@ export class DocentesComponent implements OnInit {
     
   }
 
+  public nombrePorDefecto = '';
+  public apellidoPorDefecto = '';
+  public cedulaPorDefecto = '';
+  public celularPorDefecto = '';
+  public emailPorDefecto = '';
   modalEditar(id: string){
     this.opened = true;
     this.docenteService.getFilterData("id", id).subscribe((resp: any) => {
@@ -277,7 +282,11 @@ export class DocentesComponent implements OnInit {
           } as Idocentes)
       );
       console.log(this.docentes_edit);
-      this.placeholderNombre = this.docentes_edit[0].id;
+      this.nombrePorDefecto = this.docentes_edit[0].nombre;
+      this.apellidoPorDefecto = this.docentes_edit[0].apellido;
+      this.cedulaPorDefecto = this.docentes_edit[0].cedula;
+      this.celularPorDefecto = this.docentes_edit[0].celular ?? '';
+      this.emailPorDefecto = this.docentes_edit[0].email;
     });
   }
 

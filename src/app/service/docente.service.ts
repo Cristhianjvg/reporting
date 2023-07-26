@@ -17,7 +17,7 @@ export class DocenteService {
   getFilterData(orderBy: string, equalTo: string){
 
     return this.http.get(`${environment.urlFirebase}docentes.json?orderBy="${orderBy}"&equalTo="${equalTo}"&print=pretty`)
-    
+
   }
 
   getData(){
@@ -26,5 +26,9 @@ export class DocenteService {
 
   postdata(data: Idocentes, token: any){
     return this.http.post(`${environment.urlFirebase}docentes.json?auth=${token}`, data);  
+  }
+
+  getItem(id: string){
+    return this.http.get(`${environment.urlFirebase}docentes/${id}.json`);
   }
 }

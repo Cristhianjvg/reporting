@@ -17,6 +17,7 @@ export class DocenteService {
   getFilterData(orderBy: string, equalTo: string){
 
     return this.http.get(`${environment.urlFirebase}docentes.json?orderBy="${orderBy}"&equalTo="${equalTo}"&print=pretty`)
+    
   }
 
   getData(){

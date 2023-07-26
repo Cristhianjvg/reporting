@@ -10,12 +10,14 @@ import { InputsModule } from "@progress/kendo-angular-inputs";
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FilterPipe } from 'src/app/pipes/filter.pipe';
 
 
 
 
 @NgModule({
-  declarations: [DocentesComponent],
+  declarations: [DocentesComponent,
+    FilterPipe],
   imports: [
     CommonModule,
     DocentesRoutingModule,

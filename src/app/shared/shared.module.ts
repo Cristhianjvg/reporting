@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { TopbarComponent } from './topbar/topbar.component';import { Router, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { LoginModule } from '../pages/login/login.module';
 
 
 
@@ -18,7 +19,8 @@ import { IonicModule } from '@ionic/angular';
   imports: [
     CommonModule,
     RouterModule,
-    IonicModule
+    IonicModule,
+    LoginModule
   ]
   
   

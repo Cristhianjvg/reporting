@@ -5,6 +5,8 @@ import { functions } from 'src/app/helpers/functions';
 import { Ilogin } from 'src/app/interface/login';
 import { LoginService } from 'src/app/service/login.service';
 import { Router } from '@angular/router';
+import { Usuarios} from '../../interface/usuarios'
+import { AuthServiceService } from 'src/app/service/auth-service.service';
 
 
 @Component({
@@ -12,7 +14,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent {
 
   public f = this.form.group({
     email: ['', [Validators.required, Validators.email]],
@@ -21,12 +23,12 @@ export class LoginComponent implements OnInit{
 
   formSubmitted = false;
   errorForm = "";
+  usuarios: Usuarios[] = [];
+  rol = '';
 
-  constructor(private form: FormBuilder, private loginService: LoginService, private router: Router){}
+  constructor(private form: FormBuilder, private loginService: LoginService, private router: Router,
+    private authService: AuthServiceService){}
 
-  ngOnInit(): void {
-    
-  }
 
   login(){
 
@@ -42,12 +44,21 @@ export class LoginComponent implements OnInit{
       returnSecureToken: true
     }
 
+    const usuario: Usuarios = {
+      email: this.f.controls.email.value as string,
+      rol: ''
+    }
+
+
     this.loginService.login(data).subscribe(
       (resp)=>{
 
-        console.log("resp", resp)
+        console.log("este resp", resp)
 
-        this.router.navigateByUrl("/")
+        // if(this.usuarioDatabase(usuario)){
+          
+          this.router.navigateByUrl("docentes")
+        // }
       },
       (err)=>{
         
@@ -66,6 +77,37 @@ export class LoginComponent implements OnInit{
       }
     );
 
+  }
+
+  creaUsuario(usuario: Usuarios){
+
+
+  }
+
+  usuarioDatabase(usuario: Usuarios): any{
+    
+    
+    this.authService.getData().subscribe(
+      (resp: any) => {
+        this.usuarios = Object.keys(resp).map(a => ({
+          email: resp[a].email,
+          rol: resp[a].rol
+        }) as Usuarios).filter(user => user.email == usuario.email);
+        console.log(usuario.email);
+        if (this.usuarios.length > 0) {
+          usuario.rol = this.usuarios[0].rol;
+          
+        }
+      },
+      (error: any) => {
+        // Manejar el error de la solicitud de datos si es necesario.
+        console.error('Error al obtener los datos de usuarios.', error);
+      });
+      return true
+  }
+
+  getRol(){
+    return this.rol;
   }
 
   invalidField(field:string){

@@ -14,6 +14,11 @@ export class DocenteService {
     return this.http.delete(`${environment.urlFirebase}docentes.json?auth=${token}`);
   }
 
+  getFilterData(orderBy: string, equalTo: string){
+
+    return this.http.get(`${environment.urlFirebase}docentes.json?orderBy="${orderBy}"&equalTo="${equalTo}"&print=pretty`)
+  }
+
   getData(){
     return this.http.get(`${environment.urlFirebase}docentes.json`)
   }

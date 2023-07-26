@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth';
 import { environment } from 'src/enviroment/environment';
+// import { CanLoad Route } from '@angular/router';
 // import { environment } from 'src/enviroment/environment';
 
 @Injectable({
@@ -30,7 +31,6 @@ export class AuthGuard implements CanActivate {
               resolve(true);
             },
             err =>{
-
               console.log("no borre los tokens");
               resolve(false);
             }

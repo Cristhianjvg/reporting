@@ -19,6 +19,7 @@ export class DocentesComponent implements OnInit {
   position: string = '0';
   lastId: number = 0;
   public page!: number;
+  filterPipe = '';
 
   public f = this.form.group({
     nombre: [
@@ -29,7 +30,7 @@ export class DocentesComponent implements OnInit {
     cedula: ['', [Validators.required]],
     celular: [''],
     email: ['', [Validators.required, Validators.email]],
-    asignatura: ['', Validators.required],
+    // asignatura: ['', Validators.required],
   });
   formSubmitted = false;
   errorForm = '';
@@ -65,14 +66,14 @@ export class DocentesComponent implements OnInit {
       this.f.controls['cedula'].disable();
       this.f.controls['celular'].disable();
       this.f.controls['email'].disable();
-      this.f.controls['asignatura'].disable();
+      // this.f.controls['asignatura'].disable();
     } else {
       this.f.controls['nombre'].enable();
       this.f.controls['apellido'].enable();
       this.f.controls['cedula'].enable();
       this.f.controls['celular'].enable();
       this.f.controls['email'].enable();
-      this.f.controls['asignatura'].enable();
+      // this.f.controls['asignatura'].enable();
     }
   }
 
@@ -87,7 +88,7 @@ export class DocentesComponent implements OnInit {
             cedula: resp[a].cedula,
             celular: resp[a].celular,
             email: resp[a].email,
-            asignatura: resp[a].asignatura,
+            // asignatura: resp[a].asignatura,
           } as Idocentes)
       );
     });
@@ -142,7 +143,8 @@ export class DocentesComponent implements OnInit {
         apellido: this.f.controls.apellido.value ?? '',
         celular: this.f.controls.celular.value,
         email: this.f.controls.email.value ?? '',
-        asignatura: this.f.controls.asignatura.value ?? '',
+        estado: 0,
+        // asignatura: this.f.controls.asignatura.value ?? '',
       };
 
       this.docenteService
@@ -175,7 +177,7 @@ export class DocentesComponent implements OnInit {
             cedula: resp[a].cedula,
             celular: resp[a].celular,
             email: resp[a].email,
-            asignatura: resp[a].asignatura,
+            // asignatura: resp[a].asignatura,
           } as Idocentes)
       );
 
@@ -201,7 +203,8 @@ export class DocentesComponent implements OnInit {
                 cedula: row[headers.indexOf('NÚMERO_DE_CÉDULA ')],
                 celular: row[headers.indexOf('NÚMERO_DE_CÉDULA ')],
                 email: row[headers.indexOf('EMAIL')],
-                asignatura: row[headers.indexOf('ASIGNATURA')],
+                estado: 0
+                // asignatura: row[headers.indexOf('ASIGNATURA')],
               };
 
               // Validar que no haya campos vacíos o nulos
@@ -210,8 +213,8 @@ export class DocentesComponent implements OnInit {
                 !docente.apellido ||
                 !docente.cedula ||
                 !docente.celular ||
-                !docente.email ||
-                !docente.asignatura
+                !docente.email 
+                // docente.asignatura
               ) {
                 console.log('Registro del CSV con campos faltantes:', docente);
                 return null; // Salir del mapeo y no insertar este registro
@@ -238,6 +241,14 @@ export class DocentesComponent implements OnInit {
         },
       });
     });
+  }
+
+  deleteDocente(id: string){
+    // this.docenteService.getFilterData(id, )
+  }
+
+  editarDocente(){
+
   }
 
   invalidField(field: string) {

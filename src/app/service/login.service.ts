@@ -3,6 +3,8 @@ import { Ilogin } from '../interface/login';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/enviroment/environment';
 import { map } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +15,7 @@ export class LoginService {
 
   login(data: Ilogin){
     return this.http.post(environment.urlLogin, data).pipe(
-      map((resp:any) => {
-
-        // console.log("resp", resp.idtoken, resp.refreshToken);
+      tap((resp:any) => {
 
         localStorage.setItem("token", resp.idToken);
         localStorage.setItem("refreshToken", resp.refreshToken);

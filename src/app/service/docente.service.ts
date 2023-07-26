@@ -20,7 +20,7 @@ export class DocenteService {
   }
 
   getData(){
-    return this.http.get(`${environment.urlFirebase}docentes.json`)
+    return this.http.get(`${environment.urlFirebase}docentes.json`);
   }
 
   postdata(data: Idocentes, token: any){

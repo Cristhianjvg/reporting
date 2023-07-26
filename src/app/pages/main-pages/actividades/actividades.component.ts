@@ -4,7 +4,7 @@ import { Idocentes } from 'src/app/interface/idocentes';
 import { DocenteService } from 'src/app/service/docente.service';
 import { CarrerasService } from 'src/app/service/carreras.service';
 import { AsignaturaService } from 'src/app/service/asignatura.service';
-import { Carreras } from 'src/app/interface/carreras';
+import { ICarreras } from 'src/app/interface/Icarreras';
 import { Iasignatura } from 'src/app/interface/iasignatura';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MaterialesService } from 'src/app/service/materiales.service';
@@ -42,7 +42,7 @@ export class ActividadesComponent implements AfterViewInit {
 
   
   docentes: Idocentes[] = [];
-  carreras: Carreras[] = [];
+  carreras: ICarreras[] = [];
   asignaturas: Iasignatura[] = [];
   materiales: Imateriales[] = [];
 
@@ -73,9 +73,12 @@ export class ActividadesComponent implements AfterViewInit {
     this.carrerasService.getData().subscribe((resp: any)=> {
       this.carreras = Object.keys(resp).map(a => ({
         id: resp[a].id,
+        codigo:resp[a].codigo,
+        periodo:resp[a].periodo,
         nombre: resp[a].nombre,
-      }) as Carreras)
-      this.CarrerasData = this.carreras.map((carreras: Carreras) => {
+        asignatura:resp[a].asignatura,
+      }) as ICarreras)
+      this.CarrerasData = this.carreras.map((carreras: ICarreras) => {
      
         return { text: carreras.nombre, value: parseInt(carreras.id, 10)  };
       });

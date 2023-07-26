@@ -23,7 +23,9 @@ const routes: Routes = [
   {path: 'notificacion', loadChildren: () => import('./main-pages/notificaciones/notificaciones.module').then(m =>m.NotificacionesModule)},
   {path: 'asignaciones', loadChildren: () => import('./main-pages/asignaciones/asignaciones.module').then(m =>m.AsignacionesModule)},
   {path: 'carga-material', loadChildren: () => import('./main-pages/carga-material/carga-material.module').then(m =>m.CargaMaterialModule)},
-  ]}
+  {path: 'carreras', loadChildren: () => import('./main-pages/carreras/carreras.module').then(m =>m.DocentesModule)},
+  
+]}
 ]
 
 @NgModule({

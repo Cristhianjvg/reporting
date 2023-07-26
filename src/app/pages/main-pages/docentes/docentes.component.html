@@ -194,8 +194,13 @@
               <td>{{doc.celular}}</td>
               <td >
                 <button class="btn" style="text-align: center; color: green;"
-                (click)="editarDocente()">
-                  <ion-icon style="cursor: pointer;" name="create-outline"></ion-icon></button></td>
+                (click)="modalEditar(doc.id)">
+                  <ion-icon style="cursor: pointer;" name="create-outline"></ion-icon>
+                </button>
+
+                
+                
+              </td>
               <td style="text-align: center; color: red;"><ion-icon style=" cursor: pointer;" name="close-circle-outline"></ion-icon></td>
             </tr>
             <pagination-controls (pageChange)="page = $event" previousLabel="" nextLabel=""></pagination-controls>
@@ -206,7 +211,36 @@
     </div>
     <!-- /.card -->
   </div>
+
+
+  <!--  ventana modal para editar docentes --> 
+    <kendo-dialog title="Oh no!" *ngIf="opened" (close)="close()" >
+      <!--  ventana modal para editar docentes -->
+      <form class="k-form" [formGroup]="f" >
+        <kendo-formfield>
+          <label for="nombre">Name*</label>
+          <input
+            id="nombre"
+            class="form-control"
+            type="text"
+            [placeholder]="placeholderNombre"
+            formControlName="nombre"
+            [ngClass]="{'is-invalid': invalidField('nombre') || f.controls.nombre.invalid && f.controls.nombre.errors?.['pattern'] }"
+            kendoTextBox
+          />
+          <kendo-formerror>Error: Name is required</kendo-formerror>
+        </kendo-formfield>
+      </form>
+      <kendo-dialog-actions [layout]="actionsLayout">
+        <button kendoButton (click)="guardarDocente()">guardar</button>
+        <button kendoButton (click)="close()" themeColor="primary">
+          cancelar
+        </button>
+      </kendo-dialog-actions>
+    </kendo-dialog>
 </section>
+
+
 
 <!-- <script>
   $(function () {

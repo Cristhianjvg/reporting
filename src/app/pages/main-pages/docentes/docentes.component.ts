@@ -6,6 +6,12 @@ import { alerts } from 'src/app/helpers/alerts';
 import { functions } from 'src/app/helpers/functions';
 import { CarrerasService } from 'src/app/service/carreras.service';
 import { Papa } from 'ngx-papaparse'; // Importa el módulo Papa para parsear CSV
+import {
+  DialogService,
+  DialogRef,
+  DialogCloseResult,
+  ActionsLayout
+} from "@progress/kendo-angular-dialog";
 
 
 @Component({
@@ -15,10 +21,14 @@ import { Papa } from 'ngx-papaparse'; // Importa el módulo Papa para parsear CS
 })
 export class DocentesComponent implements OnInit {
   docentes: Idocentes[] = [];
+  docentes_edit: Idocentes[] = [];
   position: string = '0';
   lastId: number = 0;
   public page!: number;
   filterPipe = '';
+  public placeholderNombre = '';
+  public opened = false;
+  public actionsLayout: ActionsLayout = "end";
 
   public f = this.form.group({
     nombre: [
@@ -38,7 +48,7 @@ export class DocentesComponent implements OnInit {
     private docenteService: DocenteService,
     private form: FormBuilder,
     private carrerasService: CarrerasService,
-    private papa: Papa
+    private papa: Papa,
   ) {}
 
   ngOnInit(): void {
@@ -246,8 +256,33 @@ export class DocentesComponent implements OnInit {
     // this.docenteService.getFilterData(id, )
   }
 
-  editarDocente(){
+  public close(): void {
+    this.opened = false;
+    
+  }
 
+  modalEditar(id: string){
+    this.opened = true;
+    this.docenteService.getFilterData("id", id).subscribe((resp: any) => {
+      this.docentes_edit = Object.keys(resp).map(
+        (a) =>
+          ({
+            id: resp[a].id,
+            apellido: resp[a].apellido,
+            nombre: resp[a].nombre,
+            cedula: resp[a].cedula,
+            celular: resp[a].celular,
+            email: resp[a].email,
+            // asignatura: resp[a].asignatura,
+          } as Idocentes)
+      );
+      console.log(this.docentes_edit);
+      this.placeholderNombre = this.docentes_edit[0].id;
+    });
+  }
+
+  guardarDocente(){
+    
   }
 
   invalidField(field: string) {

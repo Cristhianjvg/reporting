@@ -5,7 +5,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { alerts } from 'src/app/helpers/alerts';
 import { functions } from 'src/app/helpers/functions';
 import { CarrerasService } from 'src/app/service/carreras.service';
-import { Carreras } from 'src/app/interface/carreras';
 import { Papa } from 'ngx-papaparse'; // Importa el módulo Papa para parsear CSV
 import {
   DialogService,

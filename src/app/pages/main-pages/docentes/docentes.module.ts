@@ -11,8 +11,7 @@ import { ButtonsModule } from "@progress/kendo-angular-buttons";
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FilterPipe } from 'src/app/pipes/filter.pipe';
-
-
+import { DialogsModule } from "@progress/kendo-angular-dialog";
 
 
 @NgModule({
@@ -28,7 +27,8 @@ import { FilterPipe } from 'src/app/pipes/filter.pipe';
     InputsModule,
     ButtonsModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    DialogsModule
   ]
 })
 export class DocentesModule { }

@@ -66,48 +66,40 @@
                   <label for="pao">PAO:</label>
                   <input id="pao" type="number" formControlName="pao" class="form-control" min="0" max="4" placeholder="Ingrese un número del 0 al 4">
                 </div>
-              <div class="form-group">
-                  <label for="fechainicio">Fecha de Inicio:</label>
-                  <input id="fechainicio" type="date" formControlName="fechainicio" class="form-control">
-              </div>
-              <div class="form-group">
-                  <label for="fechafinal">Fecha Final:</label>
-                  <input id="fechafinal" type="date" formControlName="fechafinal" class="form-control">
-              </div>
-          </div>
-          <div class="col-md-5">
-              <div class="form-group">
-                  <label for="asignatura">Asignatura:</label>
-                    <kendo-multiselect
-                      [data]="AsignaturaData"
-                      [kendoDropDownFilter]="filterSettings"
-                      textField="text"
-                      valueField="value"
-                      id="asignatura"
-                      formControlName="asignatura"
-                    >
-                    <ng-template kendoMultiSelectCustomItemTemplate let-customText>
-                      <strong>{{ customText }}</strong>
-                    </ng-template>
-                    </kendo-multiselect>
-              </div>
-              <div class="form-group">
-                  <label for="email">Email:</label>
-                  <input id="email" class="form-control" formControlName="email" type="email" placeholder="Ingrese su Email" value="">
-              </div>
-              <div class="form-group">
-                  <label for="actividad">Actividad:</label>
-                  <textarea id="actividad" class="form-control" formControlName="actividad" rows="3" placeholder="Ingrese descripción"></textarea>
-              </div>
-          </div>
-          
-          <div class="col-md-12">
-
-              <button id="btnAsignar" class="btn btn-primary">Asignar</button>
-          </div>
-      </div>
-    </form>
-  </div>
+                <div class="form-group">
+                    <label for="fechaFin">Fecha Final:</label>
+                    <input id="fechaFin" type="date" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="asignatura">Asignatura:</label>
+                      <kendo-multiselect
+                        [data]="AsignaturaData"
+                        [kendoDropDownFilter]="filterSettings"
+                        textField="text"
+                        valueField="value"
+                      >
+                      <ng-template kendoMultiSelectCustomItemTemplate let-customText>
+                        <strong>{{ customText }}</strong>
+                      </ng-template>
+                      </kendo-multiselect>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input id="email" class="form-control" type="email" placeholder="Ingrese su Email">
+                </div>
+                <div class="form-group">
+                    <label for="actividad">Actividad:</label>
+                    <textarea id="actividad" class="form-control" rows="3" placeholder="Ingrese descripción"></textarea>
+                </div>
+            </div>
+            
+            <div class="col-md-12">
+                <button id="btnAsignar" class="btn btn-primary">Asignar</button>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section class="content-section1">

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Ilogin } from '../interface/login';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/enviroment/environment';
-import { map } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 
@@ -24,4 +23,5 @@ export class LoginService {
     );
 
   }
+
 }

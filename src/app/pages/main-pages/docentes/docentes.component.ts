@@ -101,7 +101,7 @@ export class DocentesComponent implements OnInit {
           } as Idocentes)
       );
     });
-    console.log(this.docentes);
+    console.log("traer docentes: ",this.docentes);
   }
 
   // delete tools grid
@@ -172,6 +172,7 @@ export class DocentesComponent implements OnInit {
             console.log(err);
           }
         );
+        this.getDocentes();
     }
   }
 

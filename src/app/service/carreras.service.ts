@@ -11,7 +11,7 @@ export class CarrerasService {
   constructor(private http: HttpClient) { }
 
   getData(){
-    return this.http.get(`${environment.urlFirebase}carreras.json`)
+    return this.http.get(`${environment.urlFirebase}carrera.json`)
   }
   
 

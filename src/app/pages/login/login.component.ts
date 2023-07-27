@@ -69,7 +69,7 @@ export class LoginComponent {
           alerts.basicAlert("Error", "Invalid password", "error");
         }else{
           // alerts.basicAlert("Error", "An error ocurred", "error");
-                  this.router.navigateByUrl("/")
+          this.router.navigateByUrl("/")
 
         }
 
@@ -80,6 +80,7 @@ export class LoginComponent {
   }
 
   creaUsuario(usuario: Usuarios){
+
 
 
   }

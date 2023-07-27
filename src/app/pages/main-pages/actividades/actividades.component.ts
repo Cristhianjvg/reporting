@@ -4,11 +4,15 @@ import { Idocentes } from 'src/app/interface/idocentes';
 import { DocenteService } from 'src/app/service/docente.service';
 import { CarrerasService } from 'src/app/service/carreras.service';
 import { AsignaturaService } from 'src/app/service/asignatura.service';
-import { ICarreras } from 'src/app/interface/Icarreras';
+import { Carreras } from 'src/app/interface/carreras';
 import { Iasignatura } from 'src/app/interface/iasignatura';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MaterialesService } from 'src/app/service/materiales.service';
 import { Imateriales } from 'src/app/interface/imateriales';
+import { Iactividad } from 'src/app/interface/iactividad';
+import { ActividadService } from 'src/app/service/actividad.service';
+import { DataService } from '@progress/kendo-angular-dropdowns/common/data.service';
+import { alerts } from 'src/app/helpers/alerts';
 // import 
 
 @Component({
@@ -20,37 +24,48 @@ export class ActividadesComponent implements AfterViewInit {
 
   constructor(private docentesService: DocenteService,private carrerasService: CarrerasService,
     private asignaturasService: AsignaturaService, private form: FormBuilder,
-    private materialesService: MaterialesService){
-
+    private materialesService: MaterialesService, private actividadService: ActividadService){
+    
   }
 
   //formulario
   public f = this.form.group({
-    // carrera: ['', Validators.required],
+    carrera: ['', Validators.required],
     asignatura: ['', Validators.required],
-    docente: ['', [ Validators.required]],
+    docentes: ['', [ Validators.required]],
     email: ['', [Validators.required, Validators.email]],
-    fechaI: ['', Validators.required],
-    fechaF: ['', Validators.required],
-    descripcion: ['']
+    fechainicio: ['', Validators.required],
+    fechafinal: ['', Validators.required],
+    descripcion: ['', Validators.required],
+    pao: ['', Validators.required],
+    actividad: ['', Validators.required]
+    
   })
 
   ngAfterViewInit() {
   this.getDocentes();
   this.getCarreras();
+  this.getActividad();
   }
 
   
   docentes: Idocentes[] = [];
-  carreras: ICarreras[] = [];
+  carreras: Carreras[] = [];
+  carreras1: Carreras[] = [];
   asignaturas: Iasignatura[] = [];
   materiales: Imateriales[] = [];
+  actividades: Iactividad[] = [];
+  public value: any = [];
 
   dataActividad: any[] = []
   public DocentesData: Array<{ text: string; value: number; email: string }> = [];
   public CarrerasData: Array<{ text: string; value: number }> = [];
   public AsignaturaData: Array<{ text: string; value: number }> = [];
+  public ActividadData: Array<{ text: string; value: number }> = [];
   
+  
+
+  lastId: number = 0;
   getDocentes(){
     this.docentesService.getData().subscribe((resp: any)=> {
       this.docentes = Object.keys(resp).map(a => ({
@@ -65,20 +80,18 @@ export class ActividadesComponent implements AfterViewInit {
         return { text: docente.nombre, value: parseInt(docente.id, 10), email: docente.email  };
         
       });
-      console.log(this.DocentesData);
     });
   }
+
+
 
   getCarreras(){
     this.carrerasService.getData().subscribe((resp: any)=> {
       this.carreras = Object.keys(resp).map(a => ({
         id: resp[a].id,
-        codigo:resp[a].codigo,
-        periodo:resp[a].periodo,
         nombre: resp[a].nombre,
-        asignatura:resp[a].asignatura,
-      }) as ICarreras)
-      this.CarrerasData = this.carreras.map((carreras: ICarreras) => {
+      }) as Carreras)
+      this.CarrerasData = this.carreras.map((carreras: Carreras) => {
      
         return { text: carreras.nombre, value: parseInt(carreras.id, 10)  };
       });
@@ -88,37 +101,96 @@ export class ActividadesComponent implements AfterViewInit {
 
   getAsignaturas(carrera:any){
 
-    this.asignaturasService.getData().subscribe((resp: any)=> {
-      this.asignaturas = Object.keys(resp).map(a => ({
+    this.carrerasService.getData().subscribe((resp: any)=> {
+      this.carreras1 = Object.keys(resp).map(a => ({
         id: resp[a].id,
-        nombre: resp[a].nombre,
-        carrera: resp[a].carrera,
-        
-      }) as Iasignatura).filter(asig => asig.carrera === String(carrera[0].value));
+        asignatura: resp[a].asignatura,
+        nombre: resp[a].nombre
+      }) as Carreras).filter(asig => asig.id === String(carrera[0].value));
+      console.log(carrera[0].value);
+      console.log(this.carreras1)
 
-      this.AsignaturaData = this.asignaturas.map((asig: Iasignatura) => {
+      this.AsignaturaData = this.carreras1.map((asig: Carreras) => {
         return { text: asig.nombre, value: parseInt(asig.id, 10)  };
       });
     });
+
+    // const carreraValue = carrera && carrera[0]?.text ? carrera[0].text : '';
+    // this.f.get('carrera').setValue(carreraValue);
   }
   
   getEmail(email: any){
-
     const selectedEmail = email[0].email; // Ajusta esto si la propiedad no se llama "email".
 
     // Llenar automáticamente el campo de email con el email del docente seleccionado.
     const emailInput = document.getElementById('email') as HTMLInputElement;
     emailInput.value = selectedEmail;
 
-    // const emailInput = document.getElementById('email') as HTMLInputElement;
+    
+  }
 
+  getActividad(){
+    this.actividadService.getData().subscribe((resp: any)=> {
+      this.actividades = Object.keys(resp).map(a => ({
+        
+        id: resp[a].id,
+        docentes: resp[a].docentes,
+        carrera: resp[a].carrera,
+        pao: resp[a].pao,
+        asignatura: resp[a].asignatura,
+        email: resp[a].email,
+        actividad: resp[a].actividad,
+        fechainicio: resp[a].fechainicio,
+        fechafinal: resp[a].fechafinal
+
+      }) as Iactividad)
+      this.ActividadData = this.actividades.map((actividad: Iactividad) => {
+        return { text: actividad.actividad, value: parseInt(actividad.id, 10) };
+        
+      });
+      console.log(this.ActividadData);
+    });
   }
 
   crearActividad(){
+    this.actividades.forEach((actividad) => {
+      const actividadId = parseInt(actividad.id);
+      if (actividadId > this.lastId) {
+        this.lastId = actividadId;
+      }
+    });
+    // console.log("formulario",this.f.controls.);
 
-    // const dataActividad:  = {
-      
-    // };
+    this.lastId = this.lastId + 1;
+    const dataActividad: Iactividad = {
+      id: String(this.lastId),
+      docentes: this.f.controls.docentes.value ?? '',
+      carrera: this.f.controls.carrera.value ?? '',
+      pao: parseInt(this.f.controls.pao.value ?? ''),
+      asignatura: this.f.controls.asignatura.value ?? '',
+      email: this.f.controls.email.value ?? '',
+      actividad: this.f.controls.actividad.value ?? '',
+      fechainicio: new Date(this.f.controls.fechainicio.value ?? ''),
+      fechafinal: new Date(this.f.controls.fechafinal.value ?? ''),
+      // asignatura: this.f.controls.asignatura.value ?? '',
+    };
+
+    this.actividadService
+      .postdata(dataActividad, localStorage.getItem('token'))
+      .subscribe(
+        (resp: any) => {
+          alerts.basicAlert('OK', 'el docente fue guardado', 'success');
+          this.getDocentes();
+        },
+        (err: any) => {
+          alerts.basicAlert(
+            'Error',
+            'no se pudo guardar el docente',
+            'error'
+          );
+          console.log(err);
+        }
+  );
 
   }
   //  crearDocente() {

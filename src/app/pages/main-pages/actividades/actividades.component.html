@@ -71,6 +71,7 @@
                       </ng-template>
                       </kendo-multiselect>
                 </div>
+                
                 <div class="form-group">
                     <label for="email">Email:</label>
                     <input id="email" class="form-control" type="email" placeholder="Ingrese su Email">
@@ -79,6 +80,38 @@
                     <label for="actividad">Actividad:</label>
                     <textarea id="actividad" class="form-control" rows="3" placeholder="Ingrese descripción"></textarea>
                 </div>
+            </div>
+            <div class="col-md-5">
+              <div class="form-group">
+                <label for="archivoCSVLabel">Seleccionar CSV</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <!-- Remueve [(ngModel)] y usa (change) para manejar el evento de cambio -->
+                      <input
+                        type="checkbox"
+                        aria-label="Check to enable CSV upload"
+                      
+                      />
+                    </div>
+                  </div>
+                  <div class="custom-file">
+                    <input
+                      type="file"
+                      class="custom-file-input"
+                      id="archivoCSV"
+                      aria-describedby="inputGroupFileAddonCSV"
+                    
+                    />
+                    <label
+                      class="custom-file-label"
+                      for="archivoCSV"
+                      id="archivoCSVLabel"
+                      >Escoger Archivo</label
+                    >
+                  </div>
+                </div>
+              </div>
             </div>
             
             <div class="col-md-12">

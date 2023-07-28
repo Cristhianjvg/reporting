@@ -13,7 +13,7 @@
 </style>
 
 <h2 class="custom-heading" style="text-align: center; color: blueviolet">
-  Registro de Malla curricular
+  Registro de Asignaturas
 </h2>
 <section class="content-section">
   <div class="container-fluid">
@@ -24,93 +24,55 @@
       <form
         autocomplete="off"
         [formGroup]="a"
-        (ngSubmit)="crearCarrera()"
+        (ngSubmit)="crearAsignatura()"
         class="form-group"
         class="col-md-12"
       >
         <div style="display: flex">
           <div class="col-md-5" style="margin-right: 90px">
             <div class="form-group">
-              <label for="codigo">Codigo:</label>
-              <input
-                id="codigo"
-                class="form-control"
-                type="text"
-                placeholder="Ingrese codigo de carrera"
-                formControlName="codigo"
-              />
-              <div
-                class="invalid-feedback"
-                *ngIf="a.controls.codigo.invalid && a.controls.codigo.errors?.['required']"
-              >
-                Please fill out this field.
-              </div>
-              <div
-                class="invalid-feedback"
-                *ngIf="a.controls.codigo.invalid && a.controls.codigo.errors?.['pattern']"
-              >
-                Please write the codigo correctly
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="periodo">Periodo:</label>
-              <input
-                id="periodo"
-                class="form-control"
-                type="date"
-                placeholder="Ingrese el codigo"
-                formControlName="periodo"
-              />
-            </div>
-            <div class="form-group">
               <label for="nombre">Nombre:</label>
               <input
                 id="nombre"
                 class="form-control"
                 type="text"
-                placeholder="Ingrese el codigo"
+                placeholder="Ingrese el nombre"
                 formControlName="nombre"
               />
             </div>
-          </div>
-          <!-- <div class="col-md-5">
             <div class="form-group">
-              <label for="asignatura">Asignatura:</label>
-              <input
-                id="asignatura"
+              <label for="carrera">Carrera:</label>
+              <kendo-multiselect
+                [data]="CarrerasData"
+                [kendoDropDownFilter]="filterSettings"
+                textField="text"
+                valueField="value"
+                formControlName="carrera"
+                (valueChange)="getAsignaturas($event)"
+              >
+                <ng-template kendoMultiSelectCustomItemTemplate let-customText>
+                  <strong>{{ customText }}</strong>
+                </ng-template>
+              </kendo-multiselect>
+              <!-- <input
+                id="carrera"
                 class="form-control"
                 type="text"
-                placeholder="Ingrese nombre de asignatura"
-                formControlName="asignatura"
+                placeholder="Ingrese nombre de carrera"
+                formControlName="carrera"
+              /> -->
+            </div>
+            <div class="form-group">
+              <label for="descripcion">Descripcion:</label>
+              <input
+                id="descripcion"
+                class="form-control"
+                type="text"
+                placeholder="Ingrese la descripcion"
+                formControlName="descripcion"
               />
             </div>
-            <div class="form-group">
-              <button
-                type="button"
-                class="btn btn-primary"
-                (click)="agregarAsignatura()"
-              >
-                Agregar
-              </button>
-            </div>
-            <div class="form-group">
-              <ul class="list-group" id="carreras-list">
-                <li
-                  class="list-group-item"
-                  *ngFor="let asignatura of asignaturas; let i = index"
-                >
-                  {{ asignatura }}
-                  <button
-                    type="button"
-                    class="btn btn-danger btn-sm float-right"
-                    (click)="eliminarAsignatura(i)"
-                  >
-                    Eliminar
-                  </button>
-                </li>
-              </ul>
-            </div>
-          </div> -->
+          </div>
         </div>
         <div class="col-md-11">
           <div class="col-md-5">
@@ -119,7 +81,6 @@
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <div class="input-group-text">
-                    <!-- Remueve [(ngModel)] y usa (change) para manejar el evento de cambio -->
                     <input
                       type="checkbox"
                       aria-label="Check to enable CSV upload"
@@ -170,10 +131,9 @@
           <thead>
             <tr style="text-align: center">
               <th>ID</th>
-              <th>Codigo</th>
-              <th>Periodo</th>
+              <th>Nombre</th>
               <th>Carrera</th>
-              <!-- <th>Asignaturas</th> -->
+              <th>Descripcion</th>
               <th>Editar</th>
               <th>Eliminar</th>
             </tr>
@@ -181,19 +141,14 @@
           <tbody>
             <tr
               *ngFor="
-                let carrera of carreras
+                let carrera of asignaturas
                   | paginate : { itemsPerPage: 3, currentPage: page }
               "
             >
               <td>{{ carrera.id }}</td>
-              <td>{{ carrera.codigo }}</td>
-              <td>{{ carrera.periodo }}</td>
               <td>{{ carrera.nombre }}</td>
-              <!-- <ul visible="false">
-                <li *ngFor="let asignatura of carrera.asignatura">
-                  {{ asignatura }}
-                </li>
-              </ul> -->
+              <td>{{ carrera.carrera }}</td>
+              <td>{{ carrera.descripcion }}</td>
               <td style="text-align: center; color: green">
                 <ion-icon
                   style="cursor: pointer"

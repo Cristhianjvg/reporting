@@ -22,6 +22,7 @@ const routes: Routes = [
   {path: 'carga-material', loadChildren: () => import('./main-pages/carga-material/carga-material.module').then(m =>m.CargaMaterialModule)},
   {path: 'carreras', loadChildren: () => import('./main-pages/carreras/carreras.module').then(m =>m.DocentesModule)},
   {path: 'material', loadChildren: () => import('./main-pages/material/material.module').then(m =>m.MaterialModule)},
+  {path: 'asignatura', loadChildren: () => import('./main-pages/asignaturas/asignaturas.module').then(m =>m.AsignaturasModule)},
   
 ]}
 ]

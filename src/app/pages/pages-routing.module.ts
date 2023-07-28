@@ -10,9 +10,6 @@ const routes: Routes = [
   {path: '', 
   component: MainPagesComponent, 
   canActivate: [ AuthGuard],
-  // data: {
-  //   allowedRoles: ['Secretaria', 'docente']
-  // },
   children: [
   {path: '',
   loadChildren: () => import('./main-pages/home/home.module').then(m =>m.HomeModule)},

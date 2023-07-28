@@ -1,6 +1,6 @@
 // import { Component, AfterViewInit } from '@angular/core';
 import { Component, AfterViewInit } from '@angular/core';
-import {Storage, ref, uploadBytes} from '@angular/fire/storage';
+// import {Storage, ref, uploadBytes} from '@angular/fire/compat/storage';
 
 
 @Component({
@@ -11,20 +11,21 @@ import {Storage, ref, uploadBytes} from '@angular/fire/storage';
 export class NotificacionesComponent implements AfterViewInit {
 
 
-  constructor(private storage: Storage){
+  constructor(){
 
   }
 
   ngAfterViewInit() {
+    console.log("se carga la vista");
   }
   
 
-  subirArchivos(event: any){
-    const file = event.target.files[0];
-    const archRef = ref(this.storage, `pdfs/${file.name}`);
+  // subirArchivos(event: any){
+  //   const file = event.target.files[0];
+  //   const archRef = ref(this.storage, `pdfs/${file.name}`);
 
-    uploadBytes(archRef, file).then(x => {
-      console.log(x);
-    }).catch(error => console.log(error));
-  }
+  //   uploadBytes(archRef, file).then(x => {
+  //     console.log(x);
+  //   }).catch(error => console.log(error));
+  // }
 }

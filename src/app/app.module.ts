@@ -5,12 +5,15 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PagesModule } from './pages/pages.module';
 import { environment } from 'src/enviroment/environment';
-import {initializeApp, provideFirebaseApp} from '@angular/fire/app';
-import {provideStorage, getStorage} from '@angular/fire/storage';
+// import {initializeApp, provideFirebaseApp} from '@angular/fire/app';
+import { AngularFireModule } from '@angular/fire/compat';
+// import {provideStorage, getStorage} from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
-import { LoginModule } from './pages/login/login.module';
+
 import { ReactiveFormsModule } from '@angular/forms';
 
 
@@ -25,8 +28,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     SharedModule,
     AppRoutingModule,
-    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideStorage(() => getStorage()),
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
     DropDownsModule,
     BrowserAnimationsModule,
 

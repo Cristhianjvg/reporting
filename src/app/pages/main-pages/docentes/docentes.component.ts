@@ -5,6 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { alerts } from 'src/app/helpers/alerts';
 import { functions } from 'src/app/helpers/functions';
 import { CarrerasService } from 'src/app/service/carreras.service';
+import { AuthService } from 'src/app/service/auth.service';
 import { Papa } from 'ngx-papaparse'; // Importa el módulo Papa para parsear CSV
 import {
   DialogService,
@@ -26,6 +27,8 @@ export class DocentesComponent implements OnInit {
   lastId: number = 0;
   public page!: number;
   filterPipe = '';
+  password = '';
+  rol = ['docente'] // esto se hace ya que cualquiera que este registrado aqui tiene el rol de docente
   
   public opened = false;
   public actionsLayout: ActionsLayout = "end";
@@ -49,6 +52,7 @@ export class DocentesComponent implements OnInit {
     private form: FormBuilder,
     private carrerasService: CarrerasService,
     private papa: Papa,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -156,6 +160,11 @@ export class DocentesComponent implements OnInit {
         // asignatura: this.f.controls.asignatura.value ?? '',
       };
 
+      this.authService.registerUser(this.rol, dataDocente.email, dataDocente.nombre, localStorage.getItem('token')).then(
+        (res) => {
+          console.log(res)
+        }
+      )
       this.docenteService
         .postdata(dataDocente, localStorage.getItem('token'))
         .subscribe(

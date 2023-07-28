@@ -1,48 +1,25 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth';
-import { environment } from 'src/enviroment/environment';
-// import { CanLoad Route } from '@angular/router';
-// import { environment } from 'src/enviroment/environment';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { take, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+  constructor(private afsAuth: AngularFireAuth, private router: Router) { }
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-  constructor(private router: Router, private http: HttpClient){}
-
-  canActivate(): Promise<boolean>{
-
-      return new Promise(resolve => {
-        //validar si el token si existe
-        if(localStorage.getItem('token') != null){
-
-          //validar que el token es real
-
-          let body = {
-            idtoken: localStorage.getItem('token')
-          }
-
-          this.http.post(environment.urlGetUser, body).subscribe(
-            resp =>{
-              resolve(true);
-            },
-            err =>{
-              console.log("no borre los tokens");
-              resolve(false);
-            }
-          )
-          resolve(true);
-        }else{
-          this.router.navigateByUrl("/login");
-          resolve(false);
-          
+    return this.afsAuth.authState
+      .pipe(take(1))
+      .pipe(map(authState => !!authState))
+      .pipe(tap(auth => {
+        if (!auth) {
+          this.router.navigate(['/login']);
         }
-      })
-    
+      }));
   }
-  
 }

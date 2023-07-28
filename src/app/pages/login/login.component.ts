@@ -6,7 +6,7 @@ import { Ilogin } from 'src/app/interface/login';
 import { LoginService } from 'src/app/service/login.service';
 import { Router } from '@angular/router';
 import { Usuarios} from '../../interface/usuarios'
-import { AuthServiceService } from 'src/app/service/auth-service.service';
+import { AuthService } from 'src/app/service/auth.service';
 
 
 @Component({
@@ -24,10 +24,10 @@ export class LoginComponent {
   formSubmitted = false;
   errorForm = "";
   usuarios: Usuarios[] = [];
-  rol = '';
+  rol = [''];
 
   constructor(private form: FormBuilder, private loginService: LoginService, private router: Router,
-    private authService: AuthServiceService){}
+    private authService: AuthService){}
 
 
   login(){
@@ -45,20 +45,21 @@ export class LoginComponent {
     }
 
     const usuario: Usuarios = {
+      id: '',
       email: this.f.controls.email.value as string,
-      rol: ''
-    }
+      rol: []
+    };
 
+    this.authService.token(data).subscribe(
+      (resp: any) => console.log(resp)
+    )
 
-    this.loginService.login(data).subscribe(
-      (resp)=>{
+    this.authService.loginEmailUser(data.email, data.password).then(
+      (res)=>{
 
-        console.log("este resp", resp)
-
-        // if(this.usuarioDatabase(usuario)){
-          
-          this.router.navigateByUrl("docentes")
-        // }
+        this.router.navigateByUrl("docentes")
+        // this.router.navigate(['admin/list-books']);
+        console.log("este resp", res)
       },
       (err)=>{
         

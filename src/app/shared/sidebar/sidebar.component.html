@@ -9,16 +9,7 @@
             </a>
         </li>
 
-        <li>
-            <a href="#">
-                <span class="icon1">
-                    <ion-icon name="home-outline"></ion-icon>
-                </span>
-                <span class="title1">Dashboard</span>
-            </a>
-        </li>
-
-        <li>
+        <li *ngIf="rol === 'secretaria'  ||  rol === 'admin'">
             <a href="docentes">
                 <span class="icon1">
                     <ion-icon name="people-outline"></ion-icon>
@@ -27,7 +18,7 @@
             </a>
         </li>
 
-        <li>
+        <li *ngIf="rol === 'secretaria' ||  rol === 'admin'">
             <a href="actividades">
                 <span class="icon1">
                     <ion-icon name="clipboard-outline"></ion-icon>
@@ -35,7 +26,7 @@
                 <span class="title1">Registro de Actividades</span>
             </a>
         </li>
-        <li>
+        <li *ngIf="rol === 'secretaria' ||  rol === 'admin'">
             <a href="carreras">
                 <span class="icon1">
                     <ion-icon name="clipboard-outline"></ion-icon>
@@ -43,7 +34,7 @@
                 <span class="title1">Registro de Malla curricular</span>
             </a>
         </li>
-        <li>
+        <li *ngIf="rol === 'docente' || rol === 'admin'">
             <a href="notificacion">
                 <span class="icon1">
                     <ion-icon name="notifications-outline"></ion-icon>
@@ -52,7 +43,7 @@
             </a>
         </li>
 
-        <li>
+        <li *ngIf="rol === 'secretaria' || rol === 'admin'">
             <a href="asignaciones">
                 <span class="icon1">
                     <ion-icon name="alert-circle-outline"></ion-icon>
@@ -70,7 +61,7 @@
             </a>
         </li> -->
 
-        <li>
+        <li *ngIf="rol === 'docente' ||  rol === 'secretaria' ||  rol === 'admin'">
             <a href="calendario">
                 
                 <span class="icon1">

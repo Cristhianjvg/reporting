@@ -55,7 +55,7 @@ export class CarrerasComponent implements OnInit {
             codigo: resp[a].codigo,
             periodo: resp[a].periodo,
             nombre: resp[a].nombre,
-            asignatura: resp[a].asignatura,
+            // asignatura: resp[a].asignatura,
         } as ICarreras)
       );
     });
@@ -180,7 +180,7 @@ export class CarrerasComponent implements OnInit {
       });
 
       this.papa.parse(file, {
-        complete: (result) => {
+        complete: (result:any) => {
           const headers = result.data[0];
           result.data.shift();
           const docentesFromCSV: ICarreras[] = result.data
@@ -193,7 +193,6 @@ export class CarrerasComponent implements OnInit {
                 nombre: row[headers.indexOf('CARRERA')],
                 asignatura: row[headers.indexOf('ASIGNATURA')],
               };
-
               // Validar que no haya campos vacíos o nulos
               if (
                 !carrera.codigo ||

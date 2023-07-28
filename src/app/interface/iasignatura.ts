@@ -1,5 +1,8 @@
 export interface Iasignatura {
     id: string;
     nombre: string;
-    carrera:string
+    carrera:string;
+    descripcion:string;
+
 }
+    

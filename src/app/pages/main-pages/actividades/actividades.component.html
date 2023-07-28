@@ -9,110 +9,162 @@
   }
 </style>
 
-
-
 <section class="content-section">
   <div class="container-fluid">
-      <div class="row">
-        
-          <div class="col-md-12">
-              <h2 class="custom-heading" style="text-align: center;">Registro de Actividades</h2>
-          </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="custom-heading" style="text-align: center">
+          Registro de Actividades
+        </h2>
       </div>
-      <form
-        autocomplete="off"
-        [formGroup]="f"
-        (ngSubmit)="crearActividad()"
-        class="form-group"
-        class="col-md-12"
-        >
+    </div>
+    <form
+      autocomplete="off"
+      [formGroup]="f"
+      (ngSubmit)="crearActividad()"
+      class="form-group"
+      class="col-md-12"
+    >
       <div class="row">
-
-          <div class="col-md-5" style="margin-right: 90px;">
-              <div class="form-group">
-                  <label for="carrera">Carrera:</label>
-                    <kendo-multiselect
-                      [data]="CarrerasData"
-                      [kendoDropDownFilter]="filterSettings"
-                      textField="text"
-                      valueField="value"
-                      formControlName="carrera"
-                      (valueChange)="getAsignaturas($event)"
-                    >
-
-                    <ng-template kendoMultiSelectCustomItemTemplate let-customText>
-                      <strong>{{ customText }}</strong>
-                    </ng-template>
-                    </kendo-multiselect>
-                </div>
-                <div class="form-group">
-                  <label for="docentes">Docentes:</label>
-                  <kendo-multiselect
-                      [data]="DocentesData"
-                      [kendoDropDownFilter]="filterSettings"
-                      textField="text"
-                      valueField="value"
-                      formControlName="docentes"
-                      (valueChange)="getEmail($event)"
-                    >
-
-                    <ng-template kendoMultiSelectCustomItemTemplate let-customText>
-                      <strong>{{ customText }}</strong>
-                    </ng-template>
-                    </kendo-multiselect>
-                </div>
-
-                <div class="form-group">
-                  <label for="pao">PAO:</label>
-                  <input id="pao" type="number" formControlName="pao" class="form-control" min="0" max="4" placeholder="Ingrese un número del 0 al 4">
-                </div>
-                <div class="form-group">
-                    <label for="fechaFin">Fecha Final:</label>
-                    <input id="fechaFin" type="date" class="form-control">
-                </div>
+        <div class="col-md-5" style="margin-right: 90px">
+          <div class="form-group">
+            <label for="carrera">Carrera:</label>
+            <kendo-multiselect
+              [data]="CarrerasData"
+              [kendoDropDownFilter]="filterSettings"
+              textField="text"
+              valueField="value"
+              formControlName="carrera"
+              (valueChange)="getAsignaturas($event)"
+            >
+              <ng-template kendoMultiSelectCustomItemTemplate let-customText>
+                <strong>{{ customText }}</strong>
+              </ng-template>
+            </kendo-multiselect>
           </div>
+          <div class="form-group">
+            <label for="docentes">Docentes:</label>
+            <kendo-multiselect
+              [data]="DocentesData"
+              [kendoDropDownFilter]="filterSettings"
+              textField="text"
+              valueField="value"
+              formControlName="docentes"
+              (valueChange)="getEmail($event)"
+            >
+              <ng-template kendoMultiSelectCustomItemTemplate let-customText>
+                <strong>{{ customText }}</strong>
+              </ng-template>
+            </kendo-multiselect>
+          </div>
+
+          <div class="form-group">
+            <label for="pao">PAO:</label>
+            <input
+              id="pao"
+              type="number"
+              formControlName="pao"
+              class="form-control"
+              min="0"
+              max="4"
+              placeholder="Ingrese un número del 0 al 4"
+            />
+          </div>
+          <div class="form-group">
+            <label for="fechaFin">Fecha Final:</label>
+            <input id="fechaFin" type="date" formControlName="fechafinal"            class="form-control" />
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="form-group">
+            <label for="asignatura">Asignatura:</label>
+            <kendo-multiselect
+              [data]="AsignaturaData"
+              [kendoDropDownFilter]="filterSettings"
+              textField="text"
+              formControlName="asignatura"
+
+              valueField="value"
+            >
+              <ng-template kendoMultiSelectCustomItemTemplate let-customText>
+                <strong>{{ customText }}</strong>
+              </ng-template>
+            </kendo-multiselect>
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input
+              id="email"
+              class="form-control"
+              type="email"
+              formControlName="email"
+              placeholder="Ingrese su Email"
+            />
+          </div>
+          <div class="form-group">
+            <label for="actividad">Actividad:</label>
+            <textarea
+              id="actividad"
+              class="form-control"
+              rows="3"
+              formControlName="actividad"
+              placeholder="Ingrese descripción"
+            ></textarea>
+          </div>
+        </div>
+        <div class="col-md-11">
           <div class="col-md-5">
-              <div class="form-group">
-                  <label for="asignatura">Asignatura:</label>
-                    <kendo-multiselect
-                      [data]="AsignaturaData"
-                      [kendoDropDownFilter]="filterSettings"
-                      textField="text"
-                      valueField="value"
-                    >
-                    <ng-template kendoMultiSelectCustomItemTemplate let-customText>
-                      <strong>{{ customText }}</strong>
-                    </ng-template>
-                    </kendo-multiselect>
+            <div class="form-group">
+              <label for="archivoCSVLabel">Seleccionar CSV</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <input
+                      type="checkbox"
+                      aria-label="Check to enable CSV upload"
+                      (change)="handleCSVCheckboxChange($event)"
+                    />
+                  </div>
+                </div>
+                <div class="custom-file">
+                  <input
+                    type="file"
+                    class="custom-file-input"
+                    id="archivoCSV"
+                    aria-describedby="inputGroupFileAddonCSV"
+                    (change)="onFileSelected($event)"
+                    [disabled]="!csvEnabled"
+                  />
+                  <label
+                    class="custom-file-label"
+                    for="archivoCSV"
+                    id="archivoCSVLabel"
+                    >Escoger Archivo</label
+                  >
+                </div>
               </div>
-              <div class="form-group">
-                  <label for="email">Email:</label>
-                  <input id="email" class="form-control" type="email" placeholder="Ingrese su Email">
-              </div>
-              <div class="form-group">
-                  <label for="actividad">Actividad:</label>
-                  <textarea id="actividad" class="form-control" rows="3" placeholder="Ingrese descripción"></textarea>
-              </div>
+            </div>
           </div>
-          
-          <div class="col-md-12">
-              <button id="btnAsignar" class="btn btn-primary">Asignar</button>
-          </div>
-          
+          <button id="btnAsignar" class="btn btn-primary float-right">
+            Asignar
+          </button>
+        </div>
+
+        <!-- <div class="col-md-12">
+          <button id="btnAsignar" class="btn btn-primary">Asignar</button>
+        </div> -->
       </div>
     </form>
   </div>
 </section>
 
 <section class="content-section1">
-<!-- tabla de docentes -->
-<div class="col-md-12">
-  <!-- /.card -->
+  <!-- tabla de docentes -->
+  <div class="col-md-12">
+    <!-- /.card -->
 
-    
-    <div class="card-header" style="display: flex; align-items: center;">
-      <h3 class="card-title" style="color: blueviolet; ">ACTIVIDADES</h3>
-      
+    <div class="card-header" style="display: flex; align-items: center">
+      <h3 class="card-title" style="color: blueviolet">ACTIVIDADES</h3>
     </div>
 
     <!-- /.card-header -->
@@ -131,16 +183,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor='let doc of actividades'>
-          <!-- Utilizar un bucle *ngFor para recorrer la lista de actividades y generar las filas -->
-            <td style="text-align: center;">{{doc.id}}</td>
-            <td>{{doc.carrera}}</td>
-            <td>{{doc.docentes}}</td>
-            <td>{{doc.asignatura}}</td>
-            <td>{{doc.pao}}</td>
-            <td>{{doc.email}}</td>
-            <td>{{doc.fechainicio}}</td>
-            <td>{{doc.fechafinal}}</td>
+          <tr *ngFor="let doc of actividades">
+            <!-- Utilizar un bucle *ngFor para recorrer la lista de actividades y generar las filas -->
+            <td style="text-align: center">{{ doc.id }}</td>
+            <td>{{ doc.carrera }}</td>
+            <td>{{ doc.docentes }}</td>
+            <td>{{ doc.asignatura }}</td>
+            <td>{{ doc.pao }}</td>
+            <td>{{ doc.email }}</td>
+            <td>{{ doc.fechainicio }}</td>
+            <td>{{ doc.fechafinal }}</td>
           </tr>
         </tbody>
       </table>
@@ -150,16 +202,15 @@
   <!-- /.card -->
 </section>
 
-
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener("DOMContentLoaded", function () {
     llenarCombo();
     llenarGrid();
 
-    const btnAsignar = document.getElementById('btnAsignar');
-    btnAsignar.addEventListener('click', function (event) {
+    const btnAsignar = document.getElementById("btnAsignar");
+    btnAsignar.addEventListener("click", function (event) {
       event.preventDefault();
       asignarActividad();
     });
-   });
+  });
 </script>

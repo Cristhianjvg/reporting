@@ -1,6 +1,10 @@
 // import { Component, AfterViewInit } from '@angular/core';
-import { Component, AfterViewInit } from '@angular/core';
-// import {Storage, ref, uploadBytes} from '@angular/fire/compat/storage';
+import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { FileUploadService } from 'src/app/service/file-upload.service';
+import { FileUpload } from 'src/app/interface/file-upload';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth.service';
 
 
 @Component({
@@ -8,24 +12,36 @@ import { Component, AfterViewInit } from '@angular/core';
   templateUrl: './notificaciones.component.html',
   styleUrls: ['./notificaciones.component.css']
 })
-export class NotificacionesComponent implements AfterViewInit {
+export class NotificacionesComponent implements OnInit {
+  selectedFiles?: FileList;
+  currentFileUpload?: FileUpload;
+  percentage = 0;
 
+  constructor(private uploadService: FileUploadService) { }
 
-  constructor(){
-
+  ngOnInit(): void {
   }
 
-  ngAfterViewInit() {
-    console.log("se carga la vista");
+  selectFile(event: any): void {
+    this.selectedFiles = event.target.files;
   }
-  
 
-  // subirArchivos(event: any){
-  //   const file = event.target.files[0];
-  //   const archRef = ref(this.storage, `pdfs/${file.name}`);
+  upload(): void {
+    if (this.selectedFiles) {
+      const file: File | null = this.selectedFiles.item(0);
+      this.selectedFiles = undefined;
 
-  //   uploadBytes(archRef, file).then(x => {
-  //     console.log(x);
-  //   }).catch(error => console.log(error));
-  // }
+      if (file) {
+        this.currentFileUpload = new FileUpload(file);
+        this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
+          percentage => {
+            this.percentage = Math.round(percentage ? percentage : 0);
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      }
+    }
+  }
 }

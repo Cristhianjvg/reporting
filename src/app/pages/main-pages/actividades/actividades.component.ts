@@ -14,6 +14,7 @@ import { ActividadService } from 'src/app/service/actividad.service';
 import { DataService } from '@progress/kendo-angular-dropdowns/common/data.service';
 import { alerts } from 'src/app/helpers/alerts';
 import { Papa } from 'ngx-papaparse'; // Importa el módulo Papa para parsear CSV
+import { functions } from 'src/app/helpers/functions';
 
 // import
 
@@ -41,13 +42,17 @@ export class ActividadesComponent implements AfterViewInit {
     asignatura: ['', Validators.required],
     docentes: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
-    fechainicio: ['', Validators.required],
+    // fechainicio: ['', Validators.required],
     fechafinal: ['', Validators.required],
     descripcion: ['', Validators.required],
-    pao: ['', Validators.required],
+    pao: ['', Validators.required, Validators.pattern('01234')],
     actividad: ['', Validators.required],
   });
   formSubmitted = false;
+
+  invalidField(field: string) {
+    return functions.invalidField(field, this.f, this.formSubmitted);
+  }
 
   ngAfterViewInit() {
     this.getDocentes();
@@ -61,6 +66,7 @@ export class ActividadesComponent implements AfterViewInit {
   asignaturas: Iasignatura[] = [];
   materiales: Imateriales[] = [];
   actividades: Iactividad[] = [];
+  emailForm: string = '';
   public value: any = [];
 
   dataActividad: any[] = [];
@@ -94,6 +100,7 @@ export class ActividadesComponent implements AfterViewInit {
       });
     });
   }
+
   handleCSVCheckboxChange(event: any) {
     this.csvEnabled = event.target.checked;
     if (this.csvEnabled) {
@@ -138,11 +145,12 @@ export class ActividadesComponent implements AfterViewInit {
       this.CarrerasData = this.carreras.map((carreras: Carreras) => {
         return { text: carreras.nombre, value: parseInt(carreras.id, 10) };
       });
-      console.log('carreras', this.carreras);
+      // console.log('carreras', this.carreras);
     });
   }
 
   getAsignaturas(carrera: any) {
+
     this.carrerasService.getData().subscribe((resp: any) => {
       this.carreras1 = Object.keys(resp)
         .map(
@@ -154,24 +162,23 @@ export class ActividadesComponent implements AfterViewInit {
             } as Carreras)
         )
         .filter((asig) => asig.id === String(carrera[0].value));
-      console.log(carrera[0].value);
-      console.log(this.carreras1);
 
       this.AsignaturaData = this.carreras1.map((asig: Carreras) => {
-        return { text: asig.nombre, value: parseInt(asig.id, 10) };
+        return { text: asig.asignatura, value: parseInt(asig.id, 10) };
       });
     });
-
-    // const carreraValue = carrera && carrera[0]?.text ? carrera[0].text : '';
-    // this.f.get('carrera').setValue(carreraValue);
   }
 
   getEmail(email: any) {
     const selectedEmail = email[0].email; // Ajusta esto si la propiedad no se llama "email".
+    this.f.controls.email.setValue(email[0]?.email );
 
+    // console.log( email[0].email)
     // Llenar automáticamente el campo de email con el email del docente seleccionado.
     const emailInput = document.getElementById('email') as HTMLInputElement;
+    // console.log(emailInput.value)
     emailInput.value = selectedEmail;
+    // console.log(emailInput.value)
   }
 
   getActividad() {
@@ -297,8 +304,9 @@ export class ActividadesComponent implements AfterViewInit {
           this.lastId = actividadId;
         }
       });
-      // console.log("formulario",this.f.controls.);
 
+       console.log(this.f.controls);
+    
       this.lastId = this.lastId + 1;
       const dataActividad: Iactividad = {
         id: String(this.lastId),
@@ -308,17 +316,19 @@ export class ActividadesComponent implements AfterViewInit {
         asignatura: this.f.controls.asignatura.value ?? '',
         email: this.f.controls.email.value ?? '',
         actividad: this.f.controls.actividad.value ?? '',
-        fechainicio: new Date(this.f.controls.fechainicio.value ?? ''),
+        fechainicio: new Date(),
         fechafinal: new Date(this.f.controls.fechafinal.value ?? ''),
         // asignatura: this.f.controls.asignatura.value ?? '',
       };
+      console.log(dataActividad);
 
       this.actividadService
         .postdata(dataActividad, localStorage.getItem('token'))
         .subscribe(
           (resp: any) => {
+
+            console.log(resp);
             alerts.basicAlert('OK', 'el docente fue guardado', 'success');
-            this.getDocentes();
           },
           (err: any) => {
             alerts.basicAlert(
@@ -331,62 +341,6 @@ export class ActividadesComponent implements AfterViewInit {
         );
     }
   }
-  //  crearDocente() {
-  //   this.formSubmitted = true;
-
-  //   if (this.csvEnabled) {
-  //     // Insertar docentes desde el archivo CSV
-  //     const archivoCSVInput = document.getElementById(
-  //       'archivoCSV'
-  //     ) as HTMLInputElement;
-
-  //     if (archivoCSVInput?.files?.length) {
-  //       const file = archivoCSVInput.files[0];
-  //       this.parseCSV(file);
-  //     }
-  //   } else {
-  //     if (this.f.invalid) {
-  //       return;
-  //     }
-
-  //     console.log(this.lastId);
-  //     this.docentes.forEach((docente) => {
-  //       const docenteId = parseInt(docente.id);
-  //       if (docenteId > this.lastId) {
-  //         this.lastId = docenteId;
-  //       }
-  //     });
-
-  //     this.lastId = this.lastId + 1;
-  //     console.log(this.lastId);
-  // const dataDocente: Idocentes = {
-  //   id: String(this.lastId),
-  //   nombre: this.f.controls.nombre.value ?? '',
-  //   cedula: this.f.controls.cedula.value ?? '',
-  //   apellido: this.f.controls.apellido.value ?? '',
-  //   celular: this.f.controls.celular.value,
-  //   email: this.f.controls.email.value ?? '',
-  //   asignatura: this.f.controls.asignatura.value ?? '',
-  // };
-
-  //     this.docenteService
-  //       .postdata(dataDocente, localStorage.getItem('token'))
-  //       .subscribe(
-  //         (resp) => {
-  //           alerts.basicAlert('OK', 'el docente fue guardado', 'success');
-  //           this.getDocentes();
-  //         },
-  //         (err) => {
-  //           alerts.basicAlert(
-  //             'Error',
-  //             'no se pudo guardar el docente',
-  //             'error'
-  //           );
-  //           console.log(err);
-  //         }
-  //       );
-  //   }
-  // }
 
   public filterSettings: DropDownFilterSettings = {
     caseSensitive: false,

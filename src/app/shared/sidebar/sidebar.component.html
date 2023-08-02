@@ -34,7 +34,7 @@
                 <span class="title1">Registro de Malla curricular</span>
             </a>
         </li>
-        <li *ngIf="rol === 'docente' || rol === 'admin'">
+        <li *ngIf="rol === 'docente' || rol === 'admin' || rol === 'equipo_calidad'">
             <a href="notificacion">
                 <span class="icon1">
                     <ion-icon name="notifications-outline"></ion-icon>
@@ -61,7 +61,7 @@
             </a>
         </li> -->
 
-        <li>
+        <li *ngIf="rol === 'secretaria' || rol === 'docente' || rol === 'admin'">
             <a href="calendario">
                 
                 <span class="icon1">

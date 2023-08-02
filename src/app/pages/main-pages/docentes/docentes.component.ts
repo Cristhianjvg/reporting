@@ -276,6 +276,9 @@ export class DocentesComponent implements OnInit {
   public cedulaPorDefecto = '';
   public celularPorDefecto = '';
   public emailPorDefecto = '';
+
+
+  //ventana modal para editar los docentes
   modalEditar(id: string){
     this.opened = true;
     this.docenteService.getFilterData("id", id).subscribe((resp: any) => {

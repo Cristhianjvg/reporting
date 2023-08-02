@@ -197,9 +197,6 @@
                 (click)="modalEditar(doc.id)">
                   <ion-icon style="cursor: pointer;" name="create-outline"></ion-icon>
                 </button>
-
-                
-                
               </td>
               <td style="text-align: center; color: red;"><ion-icon style=" cursor: pointer;" name="close-circle-outline"></ion-icon></td>
             </tr>
@@ -212,76 +209,6 @@
     <!-- /.card -->
   </div>
 
-
-  <!--  ventana modal para editar docentes --> 
-    <kendo-dialog title="Editar Docente" *ngIf="opened" (close)="close()" >
-      <!--  ventana modal para editar docentes -->
-      <form class="k-form" [formGroup]="f" >
-        <kendo-formfield>
-          <label for="nombre">Nombre</label>
-          <input
-            id="nombre"
-            class="form-control"
-            type="text"
-            [value]="nombrePorDefecto"
-            formControlName="nombre"
-            [ngClass]="{'is-invalid': invalidField('nombre') || f.controls.nombre.invalid && f.controls.nombre.errors?.['pattern'] }"
-            kendoTextBox
-          />
-        </kendo-formfield>
-        <kendo-formfield>
-          <label for="celular">Celular</label>
-          <input
-            id="celular"
-            class="form-control"
-            type="text"
-            [value]="celularPorDefecto"
-            formControlName="celular"
-            kendoTextBox
-          />
-        </kendo-formfield>
-        <kendo-formfield>
-          <label for="cedula">Cedula</label>
-          <input
-            id="cedula"
-            class="form-control"
-            type="text"
-            [value]="cedulaPorDefecto"
-            formControlName="cedula"
-            [ngClass]="{ 'is-invalid': invalidField('apellido') }"
-          />
-        </kendo-formfield>
-        <kendo-formfield>
-          <label for="apellido">Apellido</label>
-          <input
-            id="apellido"
-            class="form-control"
-            type="text"
-            [value]="apellidoPorDefecto"
-            formControlName="apellido"
-            [ngClass]="{ 'is-invalid': invalidField('apellido') }"
-          />
-        </kendo-formfield>
-        <kendo-formfield>
-          <label for="email">Email</label>
-          <input
-            id="email"
-            class="form-control"
-            type="email"
-            [value]="emailPorDefecto"
-            formControlName="email"
-            [ngClass]="{ 'is-invalid': invalidField('email') }"
-          />
-        </kendo-formfield>
-      
-      </form>
-      <kendo-dialog-actions [layout]="actionsLayout">
-        <button kendoButton (click)="guardarDocente()">guardar</button>
-        <button kendoButton (click)="close()" themeColor="primary">
-          cancelar
-        </button>
-      </kendo-dialog-actions>
-    </kendo-dialog>
 </section>
 
 

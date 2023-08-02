@@ -184,16 +184,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let doc of actividades">
+          <tr *ngFor="let act of actividades">
             <!-- Utilizar un bucle *ngFor para recorrer la lista de actividades y generar las filas -->
-            <td style="text-align: center">{{ doc.id }}</td>
-            <td>{{ doc.carrera }}</td>
-            <td>{{ doc.docentes }}</td>
-            <td>{{ doc.asignatura }}</td>
-            <td>{{ doc.pao }}</td>
-            <td>{{ doc.email }}</td>
-            <td>{{ doc.fechainicio }}</td>
-            <td>{{ doc.fechafinal }}</td>
+            <td style="text-align: center">{{ act.id }}</td>
+            <td>{{ act.carrera }}</td>
+            <td>{{ act.docentes }}</td>
+            <td>{{ act.asignatura }}</td>
+            <td>{{ act.pao }}</td>
+            <td>{{ act.email }}</td>
+            <td>{{ act.fechainicio | date:'yyyy-MM-dd' }}</td>
+            <td>{{ act.fechafinal | date:'yyyy-MM-dd' }}</td>
           </tr>
         </tbody>
       </table>

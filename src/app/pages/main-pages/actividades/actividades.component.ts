@@ -15,6 +15,8 @@ import { DataService } from '@progress/kendo-angular-dropdowns/common/data.servi
 import { alerts } from 'src/app/helpers/alerts';
 import { Papa } from 'ngx-papaparse'; // Importa el módulo Papa para parsear CSV
 import { functions } from 'src/app/helpers/functions';
+import * as Notiflix from 'notiflix';
+import { HttpClient } from '@angular/common/http';
 
 // import
 
@@ -32,14 +34,14 @@ export class ActividadesComponent implements AfterViewInit {
     private materialesService: MaterialesService,
     private actividadService: ActividadService,
     private papa: Papa,
-
-
+    private http: HttpClient
   ) {}
+  public AsignaturaData: Array<{ text: string; value: number }> = [];
 
   //formulario
   public f = this.form.group({
     carrera: ['', Validators.required],
-    asignatura: ['', Validators.required],
+    asignatura: [this.AsignaturaData[0], Validators.required],
     docentes: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     // fechainicio: ['', Validators.required],
@@ -73,7 +75,7 @@ export class ActividadesComponent implements AfterViewInit {
   public DocentesData: Array<{ text: string; value: number; email: string }> =
     [];
   public CarrerasData: Array<{ text: string; value: number }> = [];
-  public AsignaturaData: Array<{ text: string; value: number }> = [];
+
   public ActividadData: Array<{ text: string; value: number }> = [];
 
   csvEnabled = false;
@@ -145,7 +147,7 @@ export class ActividadesComponent implements AfterViewInit {
       this.CarrerasData = this.carreras.map((carreras: Carreras) => {
         return { text: carreras.nombre, value: parseInt(carreras.id, 10) };
       });
-      // console.log('carreras', this.carreras);
+      
     });
   }
 
@@ -173,12 +175,9 @@ export class ActividadesComponent implements AfterViewInit {
     const selectedEmail = email[0].email; // Ajusta esto si la propiedad no se llama "email".
     this.f.controls.email.setValue(email[0]?.email );
 
-    // console.log( email[0].email)
     // Llenar automáticamente el campo de email con el email del docente seleccionado.
     const emailInput = document.getElementById('email') as HTMLInputElement;
-    // console.log(emailInput.value)
     emailInput.value = selectedEmail;
-    // console.log(emailInput.value)
   }
 
   getActividad() {
@@ -200,7 +199,6 @@ export class ActividadesComponent implements AfterViewInit {
       this.ActividadData = this.actividades.map((actividad: Iactividad) => {
         return { text: actividad.actividad, value: parseInt(actividad.id, 10) };
       });
-      console.log(this.ActividadData);
     });
   }
 
@@ -272,7 +270,7 @@ export class ActividadesComponent implements AfterViewInit {
               .postdata(carrera, localStorage.getItem('token'))
               .subscribe(
                 (resp) => {
-                  console.log('Docente insertado desde CSV:', carrera);
+                  // console.log('Docente insertado desde CSV:', carrera);
                   this.getActividad();
                 },
                 (err) => {
@@ -283,6 +281,24 @@ export class ActividadesComponent implements AfterViewInit {
         },
       });
     });
+  }
+
+  envioCorreo(){
+
+    Notiflix.Loading.standard('Cargando...');
+    let params = {
+      email: this.f.controls.email.value,
+      asunto: this.f.controls.actividad.value,
+      mensaje: 'este es el mensaje del correo'
+    }
+    // console.log(params);
+    this.http.post('http://localhost:3000/envio', params).subscribe((resp: any)=>{
+      Notiflix.Loading.remove();
+    },
+    (err: any) =>{
+      console.log(err);
+      Notiflix.Loading.remove();
+    })
   }
 
   crearActividad() {
@@ -305,40 +321,49 @@ export class ActividadesComponent implements AfterViewInit {
         }
       });
 
-       console.log(this.f.controls);
+      const carreraValue = this.f.controls.carrera.value;
+      const carreraText = Array.isArray(carreraValue) && carreraValue.length > 0 ? carreraValue[0].text : '';
+
+      const asignaturaValue = this.f.controls.asignatura.value;
+      const asignaturaText = Array.isArray(asignaturaValue) && asignaturaValue.length > 0 ? asignaturaValue[0].text : '';
+
+      const docenteValue = this.f.controls.docentes.value;
+      const docenteText = Array.isArray(docenteValue) && docenteValue.length > 0 ? docenteValue[0].text : '';
+
     
       this.lastId = this.lastId + 1;
       const dataActividad: Iactividad = {
         id: String(this.lastId),
-        docentes: this.f.controls.docentes.value ?? '',
-        carrera: this.f.controls.carrera.value ?? '',
+        docentes: docenteText,
+        carrera: carreraText,
         pao: parseInt(this.f.controls.pao.value ?? ''),
-        asignatura: this.f.controls.asignatura.value ?? '',
+        asignatura: asignaturaText,
         email: this.f.controls.email.value ?? '',
         actividad: this.f.controls.actividad.value ?? '',
         fechainicio: new Date(),
         fechafinal: new Date(this.f.controls.fechafinal.value ?? ''),
-        // asignatura: this.f.controls.asignatura.value ?? '',
       };
-      console.log(dataActividad);
 
-      this.actividadService
-        .postdata(dataActividad, localStorage.getItem('token'))
-        .subscribe(
+      //guardar la actividad en la base de datos
+      this.actividadService.postdata(dataActividad, localStorage.getItem('token')).subscribe(
           (resp: any) => {
 
-            console.log(resp);
-            alerts.basicAlert('OK', 'el docente fue guardado', 'success');
+            this.envioCorreo();
+            this.getActividad();
+            alerts.basicAlert('OK', 'la actividad fue guardada', 'success');
           },
           (err: any) => {
             alerts.basicAlert(
               'Error',
-              'no se pudo guardar el docente',
+              'no se pudo guardar la actividad',
               'error'
             );
             console.log(err);
           }
         );
+
+
+      
     }
   }
 

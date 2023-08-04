@@ -44,4 +44,20 @@ export class NotificacionesComponent implements OnInit {
       }
     }
   }
+
+  downloadAttachment() {
+    // name: string, url: string
+    const link = document.createElement('a');
+    link.download = 'HORA32 21-07-2023.pdf';
+    link.href = 'https://firebasestorage.googleapis.com/v0/b/reporting-6633e.appspot.com/o/pdfs%2FHORA32%2021-07-2023.pdf?alt=media&token=49a2e2f3-5f8b-4c85-83ef-9578ab2b71a1';
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  selectFile_upload(event: any){
+    this.selectedFiles = event.target.files;
+    this.upload();
+  }
 }

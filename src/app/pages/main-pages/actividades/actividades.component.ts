@@ -17,6 +17,7 @@ import { Papa } from 'ngx-papaparse'; // Importa el módulo Papa para parsear CS
 import { functions } from 'src/app/helpers/functions';
 import * as Notiflix from 'notiflix';
 import { HttpClient } from '@angular/common/http';
+import { ReporteActividadesService } from 'src/app/service/reporte-actividades.service';
 
 // import
 
@@ -34,7 +35,8 @@ export class ActividadesComponent implements AfterViewInit {
     private materialesService: MaterialesService,
     private actividadService: ActividadService,
     private papa: Papa,
-    private http: HttpClient
+    private http: HttpClient,
+    private reporteActividadesService: ReporteActividadesService
   ) {}
   public AsignaturaData: Array<{ text: string; value: number }> = [];
 
@@ -299,6 +301,17 @@ export class ActividadesComponent implements AfterViewInit {
       console.log(err);
       Notiflix.Loading.remove();
     })
+  }
+
+  onImprimir(){
+
+    const encabezado = ["Carrera", "Docente", "Asignatura", "PAO", "E-mail", "Fecha Inicio", "Fecha Final"];
+    const cuerpo = this.actividades.map((obj: any) => [obj.carrera, obj.docentes, obj.asignatura, obj.pao, obj.email, obj.fechainicio.split('T')[0], obj.fechafinal.split('T')[0]]);
+
+    // console.log(this.actividades)
+
+    this.reporteActividadesService.imprimir(encabezado, cuerpo, "Reporte de actividades", true)
+
   }
 
   crearActividad() {

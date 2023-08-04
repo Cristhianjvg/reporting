@@ -12,6 +12,7 @@ import { FileUpload } from '../interface/file-upload';
 })
 export class FileUploadService {
   private basePath = '/pdfs';
+  private fileId = 0;
 
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) { }
 
@@ -34,8 +35,10 @@ export class FileUploadService {
   }
 
   private saveFileData(fileUpload: FileUpload): void {
-    const fileId = '0';
-    this.db.object(`${this.basePath}/${fileId}`).set(fileUpload);
+    
+    this.fileId = this.fileId + 1; 
+
+    this.db.object(`${this.basePath}/${String(this.fileId)}`).set(fileUpload);
   }
 
   getFiles(numberItems: number): AngularFireList<FileUpload> {

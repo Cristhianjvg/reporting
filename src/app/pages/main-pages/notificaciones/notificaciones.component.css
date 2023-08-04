@@ -82,4 +82,88 @@
   display: block;
 }
 
+body {
+  font-size: 16px; /* Ajusta el tamaño de la letra en todo el HTML */
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Estilos para títulos y subtítulos */
+h1{
+  font-weight: bold; /* Aumentar el grosor */
+  font-size: 24px; /* Aumentar el tamaño */
+}
+h2{
+  font-weight: bold; /* Aumentar el grosor */
+  font-size: 20px; /* Aumentar el tamaño */
+}
+/* Estilo de la tabla */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px; /* Espacio superior */
+  margin-bottom: 20px; /* Espacio inferior */
+}
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+th {
+  background-color: rgb(252, 252, 252);
+  color: rgb(0, 0, 0);
+}
+
+tr:nth-child(even) {
+  background-color: rgb(248, 248, 248); /* Estilo de las filas pares */
+}
+
+tr:hover {
+  background-color: plum; /* Estilo al pasar el mouse por encima de una fila */
+}
+.container h2 {
+  text-transform: none; /* Anula la transformación a mayúsculas */
+}
+/* Estilo para el botón "Upload" */
+.btn {
+  font-size: 20px; /* Tamaño del texto del botón */
+  padding: 8px 8px; /* Espacio interno del botón (alto x ancho) */
+  background-color: blueviolet; /* Cambiar el color de fondo del botón */
+  color: white; /* Cambiar el color del texto del botón */
+  border: none; /* Quitar el borde del botón */
+  border-radius: 8px; /* Añadir esquinas redondeadas */
+  cursor: pointer;
+  margin-left: auto; /* Mover el botón a la derecha */
+  display: block; /* Hacer que el botón ocupe todo el ancho disponible */
+}
+
+/* Estilos específicos para el botón dentro del formulario */
+.form-group .btn {
+  width: 200px; /* Ancho del botón */
+}
+
+.content-section {
+  margin-left: 40px;
+  margin-right: 10px;
+  padding: 20px;
+}
+.content-section1 {
+  margin-left: 100px;
+  padding: 20px;
+}
+
+/* Estilos para los enlaces */
+a {
+  font-weight: bold; /* Aumentar el grosor del texto del enlace */
+  color: blueviolet; /* Cambiar el color del enlace */
+  text-decoration: none; /* Quitar subrayado del enlace */
+}
+
+.icono {
+  font-size: 30px; /* Tamaño del icono de descarga */
+  margin-left: 10px; /* Espacio entre el botón y el icono */
+}
+
 /* Estilos para separar los contenidos */

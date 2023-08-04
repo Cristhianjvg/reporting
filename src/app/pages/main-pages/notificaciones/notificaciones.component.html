@@ -1,67 +1,10 @@
-<style>
-  .content-section {
-    margin-left: 50px;
-    margin-right: 10px;
-    padding: 20px;
-  }
-  .content-section1 {
-    margin-left: 100px;
-    padding: 20px;
-  }
-  .container {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  
-    /* Estilo de la tabla */
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin-top: 20px; /* Espacio superior */
-      margin-bottom: 20px; /* Espacio inferior */
-    }
-    th, td {
-      padding: 10px;
-      text-align: left;
-    }
-    th {
-      background-color: rgb(162, 76, 243);
-      color: white;
-    }
-  
-    tr:nth-child(even) {
-      background-color: lavender; /* Estilo de las filas pares */
-    }
-  
-    tr:hover {
-      background-color: plum; /* Estilo al pasar el mouse por encima de una fila */
-    }
 
-    .boton {
-      width: 200px;
-    }
 
-    body {
-      font-size: 16px; /* Ajusta el tamaño de la letra en todo el HTML */
-    }
-  
-    .btn {
-      font-size: 20px; /* Tamaño del texto del botón */
-      padding: 15px 30px; /* Espacio interno del botón (alto x ancho) */
-    }
-  
-    .icono {
-      font-size: 30px; /* Tamaño del icono de descarga */
-      margin-left: 10px; /* Espacio entre el botón y el icono */
-    }
-  </style>
-
-  <section class="content-section">
+<section class="content-section">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <h2 class="custom-heading" style="text-align: center; color: blueviolet;">Asignaciones</h2>
+          <h1 style="text-align: center; color: blueviolet;">ASIGNACIONES</h1>
         </div>
       </div>
       <div class="row">
@@ -72,8 +15,8 @@
               <div class="container">
           
                 <!-- Guía Didáctica -->
-                <div class="form-group" style="margin-bottom: 20px; ">
-                  <label for="asunto">Guia didactica</label>
+                <div class="form-group col-sm-3" style="margin-bottom: 20px; ">
+                  <h2 style="color: blueviolet;">Guía didáctica</h2>
                   <div class="input-group mb-3">
                     <div class="custom-file">
                       <input (change)="selectFile($event)" type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
@@ -83,8 +26,8 @@
                 </div>
           
                 <!-- Plan Docente -->
-                <div class="form-group" style="margin-bottom: 20px; margin-left: 40px;">
-                  <label for="asunto">Plan docente</label>
+                <div class="form-group col-sm-3" style="margin-bottom: 20px; margin-left: 40px;">
+                  <h2 style="color: blueviolet;">Plan docente</h2>
                   <div class="input-group mb-3">
                     <div class="custom-file">
                       <input (change)="selectFile($event)" type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
@@ -94,8 +37,8 @@
                 </div>
           
                 <!-- Texto Guía -->
-                <div class="form-group" style="margin-left: 40px;">
-                  <label for="asunto">Texto guia</label>
+                <div class="form-group col-sm-3" style="margin-left: 40px;">
+                  <h2 style="color: blueviolet;">Texto guía</h2>
                   <div class="input-group mb-3">
                     <div class="custom-file">
                       <input (change)="selectFile($event)" type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
@@ -104,9 +47,9 @@
                   </div>
                 </div>
 
-                <div class="col-md-5">
+                <div class="col-sm-2" style="margin-top: 40px;">
                   <button
-                    class="btn btn-success btn-sm"
+                    class="btn btn-success btn-sm-1"
                     [disabled]="!selectedFiles"
                     (click)="upload()"
                   >
@@ -117,8 +60,8 @@
               </div>
             </div>
           </div>
-          
-        <table>
+      <div class="card-body table-responsive p-0">
+        <table class="table table-hover text-nowrap table-striped">
           <thead>
             <tr>
               <th>Material</th>
@@ -142,56 +85,21 @@
               <td>X</td>
               <td>Aceptado</td>
               <td>
-                <a href="enlace_archivo_1.pdf">Archivo 1</a>
+                <a href="enlace_archivo_1.pdf" (click)="downloadAttachment()">Archivo 1</a>
               </td>
-              <td><ion-icon name="download-outline"></ion-icon></td>
-            </tr>
-            <tr>
+              <!-- Botón personalizado con ícono de Ion -->
               <td>
-                
-              <li>Guía Didáctica</li>
-              <td>OCT2023-FEB2024</td>
-              <td>2023-07-30</td>
-              <td>2023-07-31</td>
-              <td>X</td>
-              <td>Aceptado</td>
-              <td>
-                <a href="enlace_archivo_1.pdf">Archivo 1</a>
+                <ion-icon name="download-outline" class="download-icon" (click)="selectFileInput.click()" style="cursor: pointer;"></ion-icon>
+                <input #selectFileInput (change)="selectFile_upload($event)" type="file" class="custom-file-input" style="display: none;">
               </td>
-              <td><ion-icon name="download-outline"></ion-icon></td>
-            </tr>
-            <tr>
-              <td>
-                
-              <li>Guía Didáctica</li>
-              <td>OCT2023-FEB2024</td>
-              <td>2023-07-30</td>
-              <td>2023-07-31</td>
-              <td>X</td>
-              <td>Aceptado</td>
-              <td>
-                <a href="enlace_archivo_1.pdf">Archivo 1</a>
-              </td>
-              <td><ion-icon name="download-outline"></ion-icon></td>
-            </tr>
-            <tr>
-              <td>
-                
-              <li>Plan Docente</li>
-              <td>OCT2023-FEB2024</td>
-              <td>2023-07-30</td>
-              <td>2023-07-31</td>
-              <td>X</td>
-              <td>Aceptado</td>
-              <td>
-                <a href="enlace_archivo_1.pdf">Archivo 1</a>
-              </td>
-              <td><ion-icon name="download-outline"></ion-icon></td>
+
             </tr>
             <!-- Puedes agregar más filas con los datos que necesites -->
           </tbody>
         </table>
+      </div>
       </form>
     </div>
   </div>
 </section>
+
